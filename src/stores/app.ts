@@ -11,7 +11,7 @@ export const useAppStore = defineStore('app', {
     } as IUser,
     logout: () => {
 
-    }
+    },
   }),
   actions: {
     setUser(new_user: IUser) {
@@ -24,6 +24,6 @@ export const useAppStore = defineStore('app', {
         email: '',
         is_admin: false,
       }
-    }
+    },
   },
 })

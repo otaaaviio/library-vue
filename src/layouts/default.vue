@@ -55,31 +55,30 @@ const drawer = ref(null)
 
 <script>
 import {useAppStore} from "../stores/app";
-const context = useAppStore();
+const store = useAppStore();
 
 export default {
   data: () => ({
     drawer: null,
-    darkMode: false,
+    darkMode: localStorage.getItem('theme') === 'dark',
     title: 'Library',
     drawerList: [
       {title: 'Home', icon: 'mdi-home', to: '/home'},
       {title: 'Books', icon: 'mdi-book', to: '/books'},
-      {title: 'Authors', icon: 'mdi-account-group', to: '/authors'},
-      {title: 'Publishers', icon: 'mdi-library', to: '/publishers'},
+      {title: 'Account', icon: 'mdi-account', to: '/account'},
     ],
     isUserLoggedIn: true,
   }),
   methods: {
     toggleDarkMode() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem('theme', this.darkMode ? 'light' : 'dark');
       this.darkMode = !this.darkMode;
     },
     handleAuth() {
       this.isUserLoggedIn ? this.$router.push('/login') : this.logout();
     },
     logout() {
-      context.logout();
+      store.logout();
       this.$router.push('/login');
     }
   },
@@ -89,7 +88,7 @@ export default {
     },
   },
   mounted() {
-    this.isUserLoggedIn = context.user.id !== -1;
+    this.isUserLoggedIn = store.user.id !== -1;
   },
   watch: {
     '$route.path': {
