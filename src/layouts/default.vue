@@ -71,15 +71,16 @@ export default {
   }),
   methods: {
     toggleDarkMode() {
-      localStorage.setItem('theme', this.darkMode ? 'light' : 'dark');
       this.darkMode = !this.darkMode;
+      localStorage.setItem('theme', this.darkMode ? 'dark' : 'light')
+      this.$vuetify.theme.global.name = this.darkMode ? 'dark' : 'light'
     },
     handleAuth() {
       this.isUserLoggedIn ? this.$router.push('/login') : this.logout();
     },
     logout() {
       store.logout();
-      this.$router.push('/login');
+      this.$router.push('/home');
     }
   },
   computed: {

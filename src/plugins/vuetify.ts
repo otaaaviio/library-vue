@@ -1,7 +1,7 @@
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
-import { createVuetify } from 'vuetify'
+import {createVuetify} from 'vuetify'
 
 export default createVuetify({
   theme: {
@@ -25,6 +25,6 @@ export default createVuetify({
         success: '#4CAF50',
         warning: '#FFC107',
       },
-    }
+    },
   },
 })
