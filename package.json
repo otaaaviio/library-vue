@@ -10,25 +10,16 @@
   "dependencies": {
     "@mdi/font": "6.2.95",
     "axios": "^1.7.2",
-    "core-js": "^3.34.0",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "roboto-fontface": "*",
     "vue": "^3.4.21",
     "vue3-toastify": "^0.2.1",
-    "vuetify": "^3.5.8",
-    "vuex-persistedstate": "^4.1.0"
+    "vuetify": "^3.5.8"
   },
   "devDependencies": {
-    "@babel/types": "^7.24.0",
     "@types/node": "^20.11.25",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-typescript": "^13.0.0",
     "eslint": "^8.57.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.22.0",
     "pinia": "^2.1.7",
     "sass": "^1.71.1",

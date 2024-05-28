@@ -61,7 +61,7 @@
 <script lang="ts">
 import {toast} from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import axios from 'axios';
+import axios from '../api/index';
 import {useAppStore} from "../stores/app";
 
 const store = useAppStore();
@@ -76,7 +76,7 @@ export default {
   }),
   methods: {
     login() {
-      axios.post('http://localhost:4000/sessions/login', this.user)
+      axios.post('sessions/login', this.user)
         .then((res) => {
           store.setUser(res.data.user);
           this.$router.push('/home').then(() => {

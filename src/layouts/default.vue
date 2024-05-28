@@ -62,7 +62,7 @@ const drawer = ref(null)
 
 <script>
 import {useAppStore} from "../stores/app";
-import axios from "axios";
+import axios from "../api/index";
 import {toast} from "vue3-toastify";
 
 const store = useAppStore();
@@ -94,7 +94,7 @@ export default {
     },
     logout() {
       axios.defaults.withCredentials = true;
-      axios.get('http://localhost:4000/sessions/logout')
+      axios.get('sessions/logout')
         .then(() => {
           this.dialogOpen = false;
           store.clearUser();
@@ -103,7 +103,12 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err)
+          if (err.response?.status === 401) {
+            store.clearUser();
+            this.$router.push('/home').then(() => {
+              toast.success("Logout successful");
+            });
+          }
           if (err.response?.status === 404) toast.error("User not found")
           else toast.error("Login failed");
         });
