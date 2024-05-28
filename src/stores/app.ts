@@ -1,28 +1,32 @@
-import { defineStore } from 'pinia';
-import { IUser } from "../interfaces/user";
-import createPersistedState from 'vuex-persistedstate';
+import {defineStore} from 'pinia';
+import {IUser} from "../interfaces/user";
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    user: {
-      id: -1,
-      name: '',
-      email: '',
-      is_admin: false,
-    },
+    user: localStorage.getItem('app') ?
+      (JSON.parse(localStorage.getItem('app'))).user :
+      {
+        id: -1,
+        name: '',
+        email: '',
+        is_admin: false,
+      },
   }),
   actions: {
     setUser(new_user: IUser) {
       this.user = new_user
     },
-    logout() {
+    clearUser() {
       this.user = {
         id: -1,
         name: '',
         email: '',
         is_admin: false,
-      };
+      }
     }
   },
-  plugins: [createPersistedState()],
+  persist: {
+    storage: localStorage,
+    paths: ['user'],
+  },
 })

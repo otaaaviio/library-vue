@@ -1,12 +1,26 @@
 <template>
   <v-app id="inspire">
+    <v-dialog v-model="dialogOpen" max-width="500">
+      <v-card title="Logout">
+        <v-card-text>
+          Are you sure you want to leave?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            text="Confirm"
+            @click="logout"
+          ></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>{{ title }}</v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn @click="handleAuth">
         <v-row align="center">
-            <v-icon>{{ isUserLoggedIn ? 'mdi-logout' : 'mdi-login' }}</v-icon>
+          <v-icon>{{ isUserLoggedIn ? 'mdi-logout' : 'mdi-login' }}</v-icon>
           <v-col>
             <v-list-item-title>{{ isUserLoggedIn ? 'Logout' : 'Login' }}</v-list-item-title>
           </v-col>
@@ -48,6 +62,8 @@ const drawer = ref(null)
 
 <script>
 import {useAppStore} from "../stores/app";
+import axios from "axios";
+import {toast} from "vue3-toastify";
 
 const store = useAppStore();
 
@@ -62,20 +78,35 @@ export default {
       {title: 'Account', icon: 'mdi-account', to: '/account'},
     ],
     isUserLoggedIn: false,
+    dialogOpen: false,
   }),
   methods: {
     toggleDarkMode() {
-      console.log(store.user.id)
       this.darkMode = !this.darkMode;
       localStorage.setItem('theme', this.darkMode ? 'dark' : 'light')
       this.$vuetify.theme.global.name = this.darkMode ? 'dark' : 'light'
     },
     handleAuth() {
-      this.isUserLoggedIn ? this.logout() : this.$router.push('/login');
+      this.isUserLoggedIn ? this.openDialog() : this.$router.push('/login');
+    },
+    openDialog() {
+      this.dialogOpen = true;
     },
     logout() {
-      store.logout();
-      this.$router.push('/home');
+      axios.defaults.withCredentials = true;
+      axios.get('http://localhost:4000/sessions/logout')
+        .then(() => {
+          this.dialogOpen = false;
+          store.clearUser();
+          this.$router.push('/home').then(() => {
+            toast.success("Logout successful");
+          });
+        })
+        .catch((err) => {
+          console.log(err)
+          if (err.response?.status === 404) toast.error("User not found")
+          else toast.error("Login failed");
+        });
     }
   },
   computed: {
