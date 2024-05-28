@@ -9,10 +9,13 @@
   },
   "dependencies": {
     "@mdi/font": "6.2.95",
+    "axios": "^1.7.2",
     "core-js": "^3.34.0",
     "roboto-fontface": "*",
     "vue": "^3.4.21",
-    "vuetify": "^3.5.8"
+    "vue3-toastify": "^0.2.1",
+    "vuetify": "^3.5.8",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@babel/types": "^7.24.0",

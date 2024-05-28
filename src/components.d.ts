@@ -10,5 +10,9 @@ declare module 'vue' {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sigin: typeof import('./components/sigin.vue')['default']
+    SigIn: typeof import('./components/sigIn.vue')['default']
+    SigInForm: typeof import('./components/sigInForm.vue')['default']
+    SigUpForm: typeof import('./components/sigUpForm.vue')['default']
   }
 }

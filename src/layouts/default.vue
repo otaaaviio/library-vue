@@ -2,22 +2,16 @@
   <v-app id="inspire">
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
       <v-app-bar-title>{{ title }}</v-app-bar-title>
-
       <v-spacer></v-spacer>
-
       <v-btn @click="handleAuth">
         <v-row align="center">
-          <v-col cols="auto">
-            <v-icon>{{ isUserLoggedIn ? 'mdi-login' : 'mdi-logout' }}</v-icon>
-          </v-col>
+            <v-icon>{{ isUserLoggedIn ? 'mdi-logout' : 'mdi-login' }}</v-icon>
           <v-col>
             <v-list-item-title>{{ isUserLoggedIn ? 'Logout' : 'Login' }}</v-list-item-title>
           </v-col>
         </v-row>
       </v-btn>
-
       <v-btn @click="toggleDarkMode" class="ml-3">
         <v-icon>{{ themeIcon }}</v-icon>
       </v-btn>
@@ -39,7 +33,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
     <v-main class="bg-grey-lighten-2">
       <router-view/>
       <app-footer/>
@@ -55,6 +48,7 @@ const drawer = ref(null)
 
 <script>
 import {useAppStore} from "../stores/app";
+
 const store = useAppStore();
 
 export default {
@@ -67,16 +61,17 @@ export default {
       {title: 'Books', icon: 'mdi-book', to: '/books'},
       {title: 'Account', icon: 'mdi-account', to: '/account'},
     ],
-    isUserLoggedIn: true,
+    isUserLoggedIn: false,
   }),
   methods: {
     toggleDarkMode() {
+      console.log(store.user.id)
       this.darkMode = !this.darkMode;
       localStorage.setItem('theme', this.darkMode ? 'dark' : 'light')
       this.$vuetify.theme.global.name = this.darkMode ? 'dark' : 'light'
     },
     handleAuth() {
-      this.isUserLoggedIn ? this.$router.push('/login') : this.logout();
+      this.isUserLoggedIn ? this.logout() : this.$router.push('/login');
     },
     logout() {
       store.logout();
@@ -90,6 +85,10 @@ export default {
   },
   mounted() {
     this.isUserLoggedIn = store.user.id !== -1;
+
+    watch(() => store.user, (newUser, oldUser) => {
+      this.isUserLoggedIn = newUser.id !== -1;
+    }, {immediate: true});
   },
   watch: {
     '$route.path': {

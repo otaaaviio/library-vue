@@ -1,5 +1,6 @@
-import {defineStore} from 'pinia'
-import {IUser} from "../interfaces/user";
+import { defineStore } from 'pinia';
+import { IUser } from "../interfaces/user";
+import createPersistedState from 'vuex-persistedstate';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -8,22 +9,20 @@ export const useAppStore = defineStore('app', {
       name: '',
       email: '',
       is_admin: false,
-    } as IUser,
-    logout: () => {
-
     },
   }),
   actions: {
     setUser(new_user: IUser) {
       this.user = new_user
     },
-    clearUser() {
+    logout() {
       this.user = {
         id: -1,
         name: '',
         email: '',
         is_admin: false,
-      }
-    },
+      };
+    }
   },
+  plugins: [createPersistedState()],
 })
