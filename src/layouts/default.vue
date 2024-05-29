@@ -62,7 +62,7 @@ const drawer = ref(null)
 
 <script>
 import {useAppStore} from "../stores/app";
-import axios from "../api/index";
+import axios from "axios";
 import {toast} from "vue3-toastify";
 
 const store = useAppStore();
@@ -108,9 +108,8 @@ export default {
             this.$router.push('/home').then(() => {
               toast.success("Logout successful");
             });
-          }
-          if (err.response?.status === 404) toast.error("User not found")
-          else toast.error("Login failed");
+          } else if (err.response?.status === 404) toast.error("User not found")
+          else toast.error("Logout failed");
         });
     }
   },
@@ -120,8 +119,6 @@ export default {
     },
   },
   mounted() {
-    this.isUserLoggedIn = store.user.id !== -1;
-
     watch(() => store.user, (newUser, oldUser) => {
       this.isUserLoggedIn = newUser.id !== -1;
     }, {immediate: true});

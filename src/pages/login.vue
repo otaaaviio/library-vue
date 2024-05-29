@@ -38,7 +38,6 @@
                     </div>
                   </div>
                 </v-col>
-
                 <sig-up-form/>
               </v-row>
             </v-window-item>
@@ -49,8 +48,7 @@
   </v-container>
 </template>
 
-<script>
-
+<script lang="ts">
 import sigUpForm from "../components/sigUpForm.vue";
 import sigInForm from "../components/sigInForm.vue";
 

@@ -10,7 +10,7 @@
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8">
 
-          <v-form ref="form" @submit.prevent="login">
+          <v-form ref="form" @submit.prevent="loginSubmit">
             <v-text-field
               label="Email"
               outlined
@@ -59,10 +59,10 @@
 </template>
 
 <script lang="ts">
-import {toast} from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import axios from '../api/index';
 import {useAppStore} from "../stores/app";
+import {toast} from "vue3-toastify";
+import axios from "axios";
 
 const store = useAppStore();
 
@@ -75,8 +75,8 @@ export default {
     showPassword: false,
   }),
   methods: {
-    login() {
-      axios.post('sessions/login', this.user)
+    async loginSubmit() {
+      await axios.post( `http://localhost:4000/sessions/login`, this.user)
         .then((res) => {
           store.setUser(res.data.user);
           this.$router.push('/home').then(() => {
@@ -84,6 +84,7 @@ export default {
           });
         })
         .catch((err) => {
+          console.log(err)
           if (err.response?.status === 404) toast.error("User not found")
           else if (err.response?.status === 401) toast.error("Invalid password")
           else toast.error("Login failed");
