@@ -58,6 +58,7 @@
     "password": "Password",
     "acceptTerms": "I Accept Terms & Conditions",
     "signUp": "Sign up",
-    "orSignUpUsing": "Or Sign up using"
-  }
+    "or": "Or Sign up using"
+  },
+  "author": "Author"
 }

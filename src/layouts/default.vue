@@ -52,7 +52,7 @@
     </v-navigation-drawer>
     <v-main class="bg-grey-lighten-2">
       <router-view/>
-      <wave-component />
+      <wave-component/>
       <app-footer/>
     </v-main>
   </v-app>

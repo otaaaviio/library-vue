@@ -5,15 +5,17 @@
     height="300"
     width="300"
   >
-    <v-card-title>title</v-card-title>
-    <v-img>imagem</v-img>
-    <v-row>
-      <v-card-text>author</v-card-text>
-      <v-card-text>category</v-card-text>
+    <v-card-title>{{ book.title }}</v-card-title>
+    <v-img height="200">imagem</v-img>
+    <v-row class="ml-1">
+      <v-card-text><h3>Author:</h3> {{ book.Author.name }}</v-card-text>
+      <v-card-text><h3>Category:</h3>{{ book.Category.name }}</v-card-text>
     </v-row>
-    <v-card-actions>
-      <v-btn>Click me</v-btn>
-    </v-card-actions>
+    <v-row class="d-flex justify-end pr-4">
+      <v-card-actions>
+        <v-btn :href="`http://localhost:3000/books/${book.id}`">see more</v-btn>
+      </v-card-actions>
+    </v-row>
   </v-card>
 </template>
 
@@ -24,14 +26,7 @@ export default {
   props: {
     book: {
       type: Object,
-      default: {
-        id: 'number',
-        title: 'string',
-        publisher: 'string',
-        author: 'string',
-        category: 'string',
-        image_url: 'string',
-      },
+      default: null,
     }
   },
 };

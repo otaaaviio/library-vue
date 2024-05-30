@@ -51,10 +51,9 @@ export default {
 <style scoped>
 .waves {
   position: absolute;
-  bottom: 45px;
+  bottom: 40px;
   width: 100%;
   height: 15vh;
-  margin-bottom: -7px;
   min-height: 100px;
   max-height: 150px;
   z-index: 1;
