@@ -52,6 +52,7 @@
     </v-navigation-drawer>
     <v-main class="bg-grey-lighten-2">
       <router-view/>
+      <wave-component />
       <app-footer/>
     </v-main>
   </v-app>
@@ -59,6 +60,7 @@
 
 <script setup>
 import {ref} from 'vue'
+import WaveComponent from "../components/waves.vue";
 
 const drawer = ref(null)
 </script>

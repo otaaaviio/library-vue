@@ -37,7 +37,7 @@
           >{{ $t('login.or') }}</h5>
           <div class="d-flex  justify-center align-center mx-10 mb-11">
             <v-btn depressed outlined color="grey">
-              <font-awesome-icon :icon="['fab', 'google']" />
+              <font-awesome-icon icon="google" />
             </v-btn>
           </div>
         </v-col>
