@@ -60,13 +60,13 @@
 
 <script setup>
 import {ref} from 'vue'
-import WaveComponent from "../components/waves.vue";
+import WaveComponent from "../components/Waves.vue";
 
 const drawer = ref(null)
 </script>
 
 <script>
-import {useAppStore} from "../stores/app";
+import {useAppStore} from "../stores/App";
 import axios from "axios";
 import {toast} from "vue3-toastify";
 

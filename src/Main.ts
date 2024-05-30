@@ -1,4 +1,4 @@
-import {registerPlugins} from '@/plugins'
+import {registerPlugins} from './plugins/Index'
 import App from './App.vue'
 import {createApp} from 'vue'
 

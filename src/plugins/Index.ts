@@ -1,6 +1,6 @@
-import vuetify from './vuetify'
-import pinia from '../stores'
-import router from '../router'
+import vuetify from './Vuetify'
+import pinia from '../stores/Index'
+import router from '../router/Index'
 import type { App } from 'vue'
 import {i18n} from "../lang/i18n";
 import Vue3Toastify, {ToastContainerOptions} from "vue3-toastify";

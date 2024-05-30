@@ -50,7 +50,7 @@ export default {
 
 <style scoped>
 .waves {
-  position: fixed;
+  position: absolute;
   bottom: 45px;
   width: 100%;
   height: 15vh;

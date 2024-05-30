@@ -35,6 +35,8 @@
 
 <script setup lang="ts">
 
+  import WaveComponent from "./Waves.vue";
+
   const items = [
     {
       title: 'Linkedin',
