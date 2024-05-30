@@ -19,7 +19,7 @@
       class="text-caption text-disabled"
       style="position: absolute; right: 16px;"
     >
-      &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Library</span>
+      &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">{{ $t('app.title') }}</span>
       —
       <a
         class="text-decoration-none on-surface"
@@ -27,7 +27,7 @@
         rel="noopener noreferrer"
         target="_blank"
       >
-        MIT License
+        {{ $t('footer.license') }}
       </a>
     </div>
   </v-footer>

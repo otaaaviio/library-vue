@@ -3,15 +3,12 @@
     <v-card-text class="mt-12">
       <h4
         class="text-center"
-      >Sign Up for an Account</h4>
-      <h5
-        class="text-center  grey--text "
-      >Let's set you up to start your first onboarding experience.<br>
-        Let's begin!</h5>
+      >{{ $t('sigUpForm.signUpForAccount') }}</h4>
+      <h5 class="text-center  grey--text " v-html="$t('sigUpForm.letsSetUp')"/>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8">
           <v-text-field
-            label="Name"
+            :label="$t('sigUpForm.name')"
             outlined
             dense
             color="blue"
@@ -25,7 +22,7 @@
             autocomplete="false"
           />
           <v-text-field
-            label="Password"
+            :label="$t('sigUpForm.password')"
             outlined
             dense
             color="blue"
@@ -34,16 +31,16 @@
           />
           <v-row>
             <v-checkbox
-              label="I Accept Terms & Conditions"
+              :label="$t('sigUpForm.acceptTerms')"
               class="mt-n1"
               color="blue"
             ></v-checkbox>
           </v-row>
-          <v-btn color="blue" dark block tile>Sign up</v-btn>
+          <v-btn color="blue" dark block tile>{{ $t('sigUpForm.signUp') }}</v-btn>
 
           <h5
             class="text-center  grey--text mt-4 mb-3"
-          >Or Sign up using</h5>
+          >{{ $t('sigUpForm.or') }}</h5>
           <div class="d-flex  justify-center align-center mx-10 mb-11">
             <v-btn depressed outlined color="grey">
               <v-icon color="red">fab fa-google</v-icon>

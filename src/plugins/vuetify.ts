@@ -1,5 +1,6 @@
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 import {createVuetify} from 'vuetify'
 
@@ -27,4 +28,7 @@ export default createVuetify({
       },
     },
   },
+  icons: {
+    iconfont: 'fa',
+  }
 })

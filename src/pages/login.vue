@@ -8,16 +8,14 @@
               <v-row>
                 <sig-in-form/>
 
-                <v-col cols="12" md="6" class="blue rounded-bl-xl">
+                <v-col cols="12" md="6" class="rounded-bl-xl bg-light-blue">
                   <div style="  text-align: center; padding: 180px 0;">
                     <v-card-text class="white--text">
-                      <h3 class="text-center ">Don't Have an Account Yet?</h3>
-                      <h5
-                        class="text-center"
-                      >Let's get you all set up so you can<br>dive deeper into the library.</h5>
+                      <h3 class="text-center ">{{ $t('loginPage.dontHaveAccount') }}</h3>
+                      <h5 class="text-center" v-html="$t('loginPage.letsGetYouSetUp')"/>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn tile outlined dark @click="step++">SIGN UP</v-btn>
+                      <v-btn tile outlined dark @click="step++">{{ $t('loginPage.signUp') }}</v-btn>
                     </div>
                   </div>
                 </v-col>
@@ -25,16 +23,14 @@
             </v-window-item>
             <v-window-item :value="2">
               <v-row>
-                <v-col cols="12" md="6" class="blue rounded-br-xl">
+                <v-col cols="12" md="6" class="bg-light-blue rounded-br-xl">
                   <div style="  text-align: center; padding: 180px 0;">
                     <v-card-text class="white--text">
-                      <h3 class="text-center ">Already Signed up?</h3>
-                      <h5
-                        class="text-center"
-                      >Sig in to register books, leave reviews, and <br> fully engage with our library.</h5>
+                      <h3 class="text-center ">{{ $t('loginPage.alreadySignedUp') }}</h3>
+                      <h5 class="text-center"v-html="$t('loginPage.signInToRegister')"/>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn tile outlined dark @click="step--">Log in</v-btn>
+                      <v-btn tile outlined dark @click="step--">{{ $t('loginPage.logIn') }}</v-btn>
                     </div>
                   </div>
                 </v-col>

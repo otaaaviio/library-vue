@@ -1,0 +1,63 @@
+{
+  "app": {
+    "title": "Biblioteca"
+  },
+  "footer": {
+    "license": "Licença MIT"
+  },
+  "login": {
+    "btn": "Entrar",
+    "title": "Faça login na sua conta",
+    "subtitle": "Faça login na sua conta para continuar construindo <br/>e editando seus fluxos de integração",
+    "emailLabel": "Email",
+    "passwordLabel": "Senha",
+    "rememberMe": "Lembrar de mim",
+    "loginButton": "Entrar",
+    "or": "Ou entre usando"
+  },
+  "errors": {
+    "emailRequired": "Email é obrigatório",
+    "emailValid": "O email deve ser válido",
+    "passwordRequired": "Senha é obrigatória",
+    "passwordLength": "A senha deve ter no mínimo 6 caracteres",
+    "userNotFound": "Usuário não encontrado",
+    "invalidPassword": "Senha inválida",
+    "loginFailed": "Falha no login"
+  },
+  "pages": {
+    "home": "Início",
+    "login": "Login",
+    "books": "Livros",
+    "account": "Conta"
+  },
+  "success": {
+    "loginSuccess": "Login bem sucedido"
+  },
+  "notFound": {
+    "title": "Página não encontrada!",
+    "subtitle": "A página que você está procurando não existe.",
+    "backToHome": "IR PARA A PÁGINA INICIAL"
+  },
+  "logout": {
+    "confirm": "Tem certeza de que deseja sair?",
+    "btnConfirm": "Confirmar",
+    "title": "Sair"
+  },
+  "loginPage": {
+    "dontHaveAccount": "Ainda não tem uma conta?",
+    "letsGetYouSetUp": "Vamos configurar tudo para que você possa <br> mergulhar mais fundo na biblioteca.",
+    "signUp": "INSCREVER-SE",
+    "alreadySignedUp": "Já se inscreveu?",
+    "signInToRegister": "Faça login para registrar livros, deixar comentários e <br>interagir totalmente com nossa biblioteca.",
+    "logIn": "Entrar"
+  },
+  "sigUpForm": {
+    "signUpForAccount": "Inscreva-se para uma conta",
+    "letsSetUp": "Vamos configurar você para começar sua primeira experiência de integração. <br>Vamos começar!",
+    "name": "Nome",
+    "password": "Senha",
+    "acceptTerms": "Eu aceito os termos e condições",
+    "signUp": "Inscrever-se",
+    "or": "Ou inscreva-se usando"
+  }
+}

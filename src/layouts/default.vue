@@ -1,14 +1,14 @@
 <template>
   <v-app id="inspire">
     <v-dialog v-model="dialogOpen" max-width="500">
-      <v-card title="Logout">
+      <v-card :title="$t('logout.title')">
         <v-card-text>
-          Are you sure you want to leave?
+          {{ $t('logout.confirm') }}
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            text="Confirm"
+            :text="$t('logout.btnConfirm')"
             @click="logout"
           ></v-btn>
         </v-card-actions>
@@ -22,11 +22,14 @@
         <v-row align="center">
           <v-icon>{{ isUserLoggedIn ? 'mdi-logout' : 'mdi-login' }}</v-icon>
           <v-col>
-            <v-list-item-title>{{ isUserLoggedIn ? 'Logout' : 'Login' }}</v-list-item-title>
+            <v-list-item-title>{{ isUserLoggedIn ? $t('logout.title') : $t('login.btn') }}</v-list-item-title>
           </v-col>
         </v-row>
       </v-btn>
-      <v-btn @click="toggleDarkMode" class="ml-3">
+      <v-btn @click="handleLang" class="ml-3" elevation="2">
+        {{ langIcon }}
+      </v-btn>
+      <v-btn @click="toggleDarkMode" class="ml-3 mr-3" elevation="2">
         <v-icon>{{ themeIcon }}</v-icon>
       </v-btn>
     </v-app-bar>
@@ -72,13 +75,9 @@ export default {
     drawer: null,
     darkMode: localStorage.getItem('theme') === 'dark',
     title: 'Library',
-    drawerList: [
-      {title: 'Home', icon: 'mdi-home', to: '/home'},
-      {title: 'Books', icon: 'mdi-book', to: '/books'},
-      {title: 'Account', icon: 'mdi-account', to: '/account'},
-    ],
     isUserLoggedIn: false,
     dialogOpen: false,
+    langBR: localStorage.getItem('locale') === 'br',
   }),
   methods: {
     toggleDarkMode() {
@@ -88,6 +87,11 @@ export default {
     },
     handleAuth() {
       this.isUserLoggedIn ? this.openDialog() : this.$router.push('/login');
+    },
+    handleLang() {
+      this.langBR = !this.langBR;
+      this.$i18n.locale = this.langBR ? 'br' : 'en';
+      localStorage.setItem('locale', this.langBR ? 'br' : 'en');
     },
     openDialog() {
       this.dialogOpen = true;
@@ -114,8 +118,18 @@ export default {
     }
   },
   computed: {
+    drawerList() {
+      return [
+        {title: this.$t('pages.home'), icon: 'mdi-home', to: '/home'},
+        {title: this.$t('pages.books'), icon: 'mdi-book', to: '/books'},
+        {title: this.$t('pages.account'), icon: 'mdi-account', to: '/account'},
+      ];
+    },
     themeIcon() {
       return this.darkMode ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent'
+    },
+    langIcon() {
+      return this.langBR ? 'BR' : 'EN'
     },
   },
   mounted() {
