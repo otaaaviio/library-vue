@@ -27,7 +27,7 @@
                   <div style="  text-align: center; padding: 180px 0;">
                     <v-card-text class="white--text">
                       <h3 class="text-center ">{{ $t('loginPage.alreadySignedUp') }}</h3>
-                      <h5 class="text-center"v-html="$t('loginPage.signInToRegister')"/>
+                      <h5 class="text-center" v-html="$t('loginPage.signInToRegister')"/>
                     </v-card-text>
                     <div class="text-center">
                       <v-btn tile outlined dark @click="step--">{{ $t('loginPage.logIn') }}</v-btn>

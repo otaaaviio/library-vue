@@ -41,7 +41,7 @@ export default defineConfig({
     Vuetify({
       autoImport: true,
       styles: {
-        configFile: 'src/styles/Settings.scss',
+        configFile: 'src/styles/settings.scss',
       },
     }),
     Fonts({

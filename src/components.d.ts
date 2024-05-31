@@ -11,10 +11,8 @@ declare module 'vue' {
     BookCard: typeof import('./components/book/BookCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SigInForm: typeof import('./components/SigInForm.vue')['default']
     SignInForm: typeof import('./components/login/SignInForm.vue')['default']
     SignUpForm: typeof import('./components/login/SignUpForm.vue')['default']
-    SigUpForm: typeof import('./components/sigUpForm.vue')['default']
     Waves: typeof import('./components/layout/Waves.vue')['default']
   }
 }

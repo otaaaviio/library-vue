@@ -11,6 +11,9 @@ router.beforeEach((to, from, next) => {
   const app = localStorage.getItem('app')
   const user_id = JSON.parse(app)?.user.id;
 
+  if(to.name === '/')
+    next('/home')
+
   if(!user_id && to.name !== '/login')
     next()
 

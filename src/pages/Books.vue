@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import axios from "axios";
-import {useAppStore} from "../stores/App";
+import {useAppStore} from "../stores/app";
 
 const store = useAppStore();
 

@@ -66,7 +66,7 @@ const drawer = ref(null)
 </script>
 
 <script>
-import {useAppStore} from "../stores/App";
+import {useAppStore} from "../stores/app";
 import axios from "axios";
 import {toast} from "vue3-toastify";
 
@@ -135,7 +135,7 @@ export default {
     },
   },
   mounted() {
-    watch(() => store.user, (newUser, oldUser) => {
+    watch(() => store.user, (newUser, _oldUser) => {
       this.isUserLoggedIn = newUser.id !== -1;
     }, {immediate: true});
   },
