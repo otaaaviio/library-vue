@@ -60,5 +60,14 @@
     "signUp": "Sign up",
     "or": "Or Sign up using"
   },
-  "author": "Author"
+  "model": {
+    "author": "Author",
+    "category": "Category",
+    "publisher": "Publisher",
+    "user": "User",
+    "book": "Book"
+  },
+  "words": {
+    "new": "New"
+  }
 }

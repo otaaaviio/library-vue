@@ -2,36 +2,65 @@
   <v-card
     :loading="false"
     elevation="5"
-    height="300"
-    width="300"
+    height="350"
+    width="220"
   >
-    <v-card-title>{{ book.title }}</v-card-title>
-    <v-img height="200">imagem</v-img>
-    <v-row class="ml-1">
-      <v-card-text><h3>Author:</h3> {{ book.Author.name }}</v-card-text>
-      <v-card-text><h3>Category:</h3>{{ book.Category.name }}</v-card-text>
+    <v-img height="220" :src="book.image_path"></v-img>
+    <v-row class=" ml-1 d-flex justify-center flex-column">
+      <v-card-title>{{ getNameRefactored(book.title) }}</v-card-title>
+      <v-card-subtitle> {{ book.author }}</v-card-subtitle>
+      <v-card-text class="pb-1"> {{ book.category }}</v-card-text>
+      <v-container class="rating">
+        <star-rating
+          :increment="0.5"
+          :rating="book.avg_rating"
+          read-only
+          :star-size="19"
+          :show-rating="false"
+          class="pl-4 mr-1"/>
+        ({{ book.review_count }})
+      </v-container>
     </v-row>
     <v-row class="d-flex justify-end pr-4">
-      <v-card-actions>
-        <v-btn :href="`http://localhost:3000/books/${book.id}`">see more</v-btn>
-      </v-card-actions>
     </v-row>
   </v-card>
 </template>
 
-<script lang="ts">
-import {IBook} from "../interfaces/Book";
+<script>
+import StarRating from 'vue-star-rating'
 
 export default {
+  components: {
+    StarRating
+  },
   props: {
     book: {
       type: Object,
       default: null,
     }
   },
-};
+  methods: {
+    getNameRefactored(name) {
+      if (name.length > 15) {
+        const words = name.split(' ');
+        if (words.length === 1) return name.slice(0, 15) + '...';
+        else if (words[0].length + words[1].length < 15) {
+          return words[0] + ' ' + words[1];
+        } else {
+          return words[0] + ' ' + words[1].charAt(0) + '.';
+        }
+      }
+      return name;
+    }
+  }
+}
 </script>
 
-<style scoped lang="sass">
+<style scoped>
+.rating {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
 
 </style>

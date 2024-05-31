@@ -1,7 +1,8 @@
 <template>
   <v-container>
-    <v-row >
-      <v-col cols="auto" sm="6" md="4" lg="3" v-for="book in books" :key="book.id" class="d-flex">
+    <v-btn :disabled="!isLogged()">{{ $t('words.new') }} {{ $t('model.book') }}</v-btn>
+    <v-row>
+      <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">
         <book-card
           :loading="false"
           :book="book"
@@ -20,6 +21,9 @@
 
 <script lang="ts">
 import axios from "axios";
+import {useAppStore} from "../stores/App";
+
+const store = useAppStore();
 
 export default {
   data() {
@@ -38,11 +42,14 @@ export default {
     },
   },
   methods: {
+    isLogged() {
+      return store.user?.id !== -1;
+    },
     async fetchBooks() {
       await axios.get(`http://localhost:4000/books`, {
         params: {
           page: this.currentPage,
-          items_per_page: 20
+          items_per_page: 12
         }
       })
         .then((res) => {
@@ -59,7 +66,6 @@ export default {
         items_per_page: 15
       })
         .then((res) => {
-          console.log(res)
         })
         .catch((err) => {
           console.log(err)
@@ -78,9 +84,5 @@ export default {
   position: relative;
   margin: 50px 0 50px 0;
   z-index: 2;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
 }
 </style>

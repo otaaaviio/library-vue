@@ -60,5 +60,14 @@
     "signUp": "Inscrever-se",
     "or": "Ou inscreva-se usando"
   },
-  "author": "Autor"
+  "model": {
+    "author": "Autor",
+    "category": "Categoria",
+    "publisher": "Editora",
+    "user": "Usuário",
+    "book": "Livro"
+  },
+  "words": {
+    "new": "Novo"
+  }
 }
