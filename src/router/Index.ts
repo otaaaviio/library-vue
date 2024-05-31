@@ -9,7 +9,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const app = localStorage.getItem('app')
-  const user_id = JSON.parse(app).user.id;
+  const user_id = JSON.parse(app)?.user.id;
+
+  if(!user_id && to.name !== '/login')
+    next()
 
   if (to.name === '/login' && user_id !== -1)
     next('/home')

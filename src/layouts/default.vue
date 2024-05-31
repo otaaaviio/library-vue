@@ -60,7 +60,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import WaveComponent from "../components/Waves.vue";
+import WaveComponent from "../components/layout/Waves.vue";
 
 const drawer = ref(null)
 </script>

@@ -49,7 +49,7 @@ export default {
       await axios.get(`http://localhost:4000/books`, {
         params: {
           page: this.currentPage,
-          items_per_page: 12
+          items_per_page: 12,
         }
       })
         .then((res) => {

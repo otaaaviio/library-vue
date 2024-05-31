@@ -1,6 +1,6 @@
 <template>
   <v-card
-    :loading="false"
+    :loading="isLoading"
     elevation="5"
     height="350"
     width="220"
@@ -37,6 +37,10 @@ export default {
     book: {
       type: Object,
       default: null,
+    },
+    isLoading: {
+      type: Boolean,
+      default: true,
     }
   },
   methods: {

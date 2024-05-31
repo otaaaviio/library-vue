@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import 'vue3-toastify/dist/index.css';
-import {useAppStore} from "../stores/App";
+import {useAppStore} from "../../stores/App";
 import {toast} from "vue3-toastify";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";

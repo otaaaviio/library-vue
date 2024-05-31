@@ -7,14 +7,14 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AppFooter: typeof import('./components/AppFooter.vue')['default']
-    BookCard: typeof import('./components/BookCard.vue')['default']
+    AppFooter: typeof import('./components/layout/AppFooter.vue')['default']
+    BookCard: typeof import('./components/book/BookCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SigInForm: typeof import('./components/SigInForm.vue')['default']
-    SignInForm: typeof import('./components/SignInForm.vue')['default']
-    SignUpForm: typeof import('./components/SignUpForm.vue')['default']
+    SignInForm: typeof import('./components/login/SignInForm.vue')['default']
+    SignUpForm: typeof import('./components/login/SignUpForm.vue')['default']
     SigUpForm: typeof import('./components/sigUpForm.vue')['default']
-    Waves: typeof import('./components/Waves.vue')['default']
+    Waves: typeof import('./components/layout/Waves.vue')['default']
   }
 }
