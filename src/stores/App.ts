@@ -5,12 +5,7 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     user: localStorage.getItem('app') ?
       (JSON.parse(localStorage.getItem('app'))).user :
-      {
-        id: -1,
-        name: '',
-        email: '',
-        is_admin: false,
-      },
+      localStorage.setItem('app', JSON.stringify({user: {id: -1, name: '', email: '', is_admin: false}})),
   }),
   actions: {
     setUser(new_user: IUser) {
