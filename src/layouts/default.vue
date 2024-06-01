@@ -75,6 +75,7 @@ export default {
     WaveComponent,
   },
   data: () => ({
+    currentTheme: localStorage.getItem('theme') || 'light',
     drawer: null,
     isUserLoggedIn: false,
     dialogOpen: false,
@@ -82,7 +83,7 @@ export default {
   }),
   computed: {
     getIconTheme(): string {
-      switch (localStorage.getItem('theme')) {
+      switch (this.currentTheme) {
         case 'dark':
           return 'mdi-weather-night';
         case 'light':
@@ -124,6 +125,7 @@ export default {
       }
       this.$vuetify.theme.global.name = theme;
       localStorage.setItem('theme', theme);
+      this.currentTheme = theme;
     },
     setLocale(locale: string) {
       i18n.global.locale = locale;
