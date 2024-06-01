@@ -24,7 +24,7 @@ export default {
   name: 'NotFound',
   methods: {
     goBack() {
-      this.$router.push('/home');
+      this.$router.push('/books');
     },
   },
 }

@@ -1,0 +1,21 @@
+{
+  "library": "Library",
+  "login": "Log In",
+  "logout": "Log Out",
+  "translations": "Translations",
+  "pt": "Portuguese",
+  "en": "English",
+  "es": "Spanish",
+  "books": "Books",
+  "reviews": "Reviews",
+  "account": "Account",
+  "darkTheme": "Dark",
+  "lightTheme": "Light",
+  "systemTheme": "System",
+  "logoutConfirmation": "Are you sure you want to log out?",
+  "confirm": "Confirm",
+  "dialogConfirm": "Are you sure you want to do this?",
+
+  "logoutSuccess": "Logged out successfully!",
+  "logoutError": "An error occurred while logging out. Please try again."
+}

@@ -1,0 +1,21 @@
+{
+  "library": "Biblioteca",
+  "login": "Iniciar Sesión",
+  "logout": "Cerrar Sesión",
+  "translations": "Traducciones",
+  "pt": "Portugués",
+  "en": "Inglés",
+  "es": "Español",
+  "books": "Libros",
+  "reviews": "Reseñas",
+  "account": "Cuenta",
+  "darkTheme": "Oscuro",
+  "lightTheme": "Claro",
+  "systemTheme": "Sistema",
+  "logoutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+  "confirm": "Confirmar",
+  "dialogConfirm": "¿Estás seguro de que quieres hacer esto?",
+
+  "logoutSuccess": "Desconectado con éxito!",
+  "logoutError": "Error al cerrar sesión! Por favor, inténtelo de nuevo."
+}

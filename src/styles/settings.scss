@@ -8,3 +8,10 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+
+.translateY {
+  &:hover {
+    transform: translateY(-2px);
+    transition: 200ms;
+  }
+}

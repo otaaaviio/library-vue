@@ -2,7 +2,7 @@ import vuetify from './vuetify'
 import pinia from '../stores'
 import router from '../router'
 import type { App } from 'vue'
-import {i18n} from "../lang/i18n";
+import {i18n} from "./i18n";
 import Vue3Toastify, {ToastContainerOptions} from "vue3-toastify";
 
 export function registerPlugins (app: App) {

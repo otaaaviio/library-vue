@@ -1,12 +1,15 @@
 <template>
   <v-container>
-    <v-btn :disabled="!isLogged()">{{ $t('words.new') }} {{ $t('model.book') }}</v-btn>
-    <v-row>
+    <v-container class="d-flex justify-end">
+    <v-btn :disabled="!isLogged()" class="translateY">{{ $t('words.new') }} {{ $t('model.book') }}</v-btn>
+    </v-container>
+      <v-row>
       <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">
         <book-card
           :loading="false"
           :book="book"
-          class="position-relative book-card"
+          class="position-relative book-card translateY cursor-pointer"
+          @click="console.log('implementar')"
         />
       </v-col>
     </v-row>
@@ -57,7 +60,6 @@ export default {
           this.totalPages = res.data.pagination.total_pages;
         })
         .catch((err) => {
-          console.log(err)
         });
     },
     async authors() {
@@ -68,7 +70,6 @@ export default {
         .then((res) => {
         })
         .catch((err) => {
-          console.log(err)
         });
     },
   },

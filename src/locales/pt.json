@@ -1,0 +1,21 @@
+{
+  "library": "Biblioteca",
+  "login": "Entrar",
+  "logout": "Sair",
+  "translations": "Traduções",
+  "pt": "Português",
+  "en": "Inglês",
+  "es": "Espanhol",
+  "books": "Livros",
+  "reviews": "Reviews",
+  "account": "Conta",
+  "darkTheme": "Escuro",
+  "lightTheme": "Claro",
+  "systemTheme": "Sistema",
+  "logoutConfirmation": "Você tem certeza que deseja sair?",
+  "confirm": "Confirmar",
+  "dialogConfirm": "Tem certeza que deseja realizar esta ação?",
+
+  "logoutSuccess": "Logout realizado com sucesso!",
+  "logoutError": "Erro ao tentar deslogar! Tente novamente mais tarde."
+}

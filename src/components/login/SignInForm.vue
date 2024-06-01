@@ -18,28 +18,19 @@
               v-model="user.email"
               :rules="[() => !!user.email || $t('errors.emailRequired'), () => /.+@.+\..+/.test(user.email) || $t('errors.emailValid')]"
             />
-            <v-text-field
-              :label="$t('login.passwordLabel')"
-              outlined
-              dense
-              color="blue"
-              autocomplete="false"
-              :type="showPassword ? 'text' : 'password'"
+            <input-password
+              :showPassword="showPassword"
+              @click:append="showPassword = !showPassword"
+              :password="user.password"
               v-model="user.password"
-              :rules="[() => !!user.password || $t('errors.passwordRequired'), () => user.password.length >= 6 || $t('errors.passwordLength')]"
             />
             <v-progress-linear class="mb-3 mt-3" height="1"></v-progress-linear>
-            <v-btn type="submit" color="blue" dark block tile>{{ $t('login.loginButton') }}</v-btn>
+            <v-btn type="submit" dark block tile>{{ $t('login.loginButton') }}</v-btn>
           </v-form>
-
           <h5
             class="text-center  grey--text mt-4 mb-3"
           >{{ $t('login.or') }}</h5>
-          <div class="d-flex  justify-center align-center mx-10 mb-11">
-            <v-btn depressed outlined color="grey">
-              <font-awesome-icon icon="google" />
-            </v-btn>
-          </div>
+          <google-btn/>
         </v-col>
       </v-row>
     </v-card-text>
@@ -52,11 +43,12 @@ import {useAppStore} from "../../stores/app";
 import {toast} from "vue3-toastify";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import InputPassword from "./inputPassword.vue";
 
 const store = useAppStore();
 
 export default {
-  components: {FontAwesomeIcon},
+  components: {InputPassword, FontAwesomeIcon},
   data: () => ({
     user: {
       email: null,
@@ -71,12 +63,11 @@ export default {
         await axios.post(`http://localhost:4000/sessions/login`, this.user)
           .then((res) => {
             store.setUser(res.data.user);
-            this.$router.push('/home').then(() => {
+            this.$router.push('/books').then(() => {
               toast.success("Login successful");
             });
           })
           .catch((err) => {
-            console.log(err)
             if (err.response?.status === 404) toast.error("User not found")
             else if (err.response?.status === 401) toast.error("Invalid password")
             else toast.error("Login failed");

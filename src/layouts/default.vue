@@ -1,19 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-dialog v-model="dialogOpen" max-width="500">
-      <v-card :title="$t('logout.title')">
-        <v-card-text>
-          {{ $t('logout.confirm') }}
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            :text="$t('logout.btnConfirm')"
-            @click="logout"
-          ></v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <dialog-confirm :dialogOpen="dialogOpen" :title="title" :on-click="function () {}"/>
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>{{ title }}</v-app-bar-title>
@@ -22,21 +9,24 @@
         <v-row align="center">
           <v-icon>{{ isUserLoggedIn ? 'mdi-logout' : 'mdi-login' }}</v-icon>
           <v-col>
-            <v-list-item-title>{{ isUserLoggedIn ? $t('logout.title') : $t('login.btn') }}</v-list-item-title>
+            <v-list-item-title>{{ isUserLoggedIn ? $t('logout') : $t('login') }}</v-list-item-title>
           </v-col>
         </v-row>
       </v-btn>
-      <v-btn @click="handleLang" class="ml-3" elevation="2">
-        {{ langIcon }}
-      </v-btn>
-      <v-btn @click="toggleDarkMode" class="ml-3 mr-3" elevation="2">
-        <v-icon>{{ themeIcon }}</v-icon>
-      </v-btn>
+      <button-menu
+        :items="locales"
+        :icon="'mdi-translate'"
+        :show-subheader="true"
+        :subheader="$t('translations')"
+        :on-click="setLocale"
+      />
+      <button-menu
+        :items="themes"
+        :icon="getIconTheme"
+        :on-click="setTheme"
+      />
     </v-app-bar>
-    <v-navigation-drawer
-      v-model="drawer"
-      temporary
-    >
+    <v-navigation-drawer v-model="drawer" temporary>
       <v-list>
         <v-list-item v-for="item in drawerList" :key="item.title" link :to="item.to">
           <v-row align="center">
@@ -50,7 +40,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-main class="bg-grey-lighten-2">
+    <v-main>
       <router-view/>
       <wave-component/>
       <app-footer/>
@@ -58,95 +48,92 @@
   </v-app>
 </template>
 
-<script setup>
-import {ref} from 'vue'
-import WaveComponent from "../components/layout/Waves.vue";
-
-const drawer = ref(null)
-</script>
-
-<script>
+<script lang="ts">
 import {useAppStore} from "../stores/app";
-import axios from "axios";
-import {toast} from "vue3-toastify";
+import WaveComponent from "../components/layout/Waves.vue";
+import DialogConfirm from "../components/utils/dialogConfirm.vue";
+import {i18n} from "../plugins/i18n";
+import vuetify from "../plugins/vuetify";
 
 const store = useAppStore();
 
 export default {
+  components: {
+    DialogConfirm,
+    WaveComponent,
+  },
   data: () => ({
     drawer: null,
-    darkMode: localStorage.getItem('theme') === 'dark',
-    title: 'Library',
     isUserLoggedIn: false,
     dialogOpen: false,
-    langBR: localStorage.getItem('locale') === 'br',
+    title: null,
+    theme: localStorage.getItem('theme') ?? 'light',
+    locale: localStorage.getItem('locale') ?? 'en',
   }),
-  methods: {
-    toggleDarkMode() {
-      this.darkMode = !this.darkMode;
-      localStorage.setItem('theme', this.darkMode ? 'dark' : 'light')
-      this.$vuetify.theme.global.name = this.darkMode ? 'dark' : 'light'
-    },
-    handleAuth() {
-      this.isUserLoggedIn ? this.openDialog() : this.$router.push('/login');
-    },
-    handleLang() {
-      this.langBR = !this.langBR;
-      this.$i18n.locale = this.langBR ? 'br' : 'en';
-      localStorage.setItem('locale', this.langBR ? 'br' : 'en');
-    },
-    openDialog() {
-      this.dialogOpen = true;
-    },
-    logout() {
-      axios.defaults.withCredentials = true;
-      axios.get('sessions/logout')
-        .then(() => {
-          this.dialogOpen = false;
-          store.clearUser();
-          this.$router.push('/home').then(() => {
-            toast.success("Logout successful");
-          });
-        })
-        .catch((err) => {
-          if (err.response?.status === 401) {
-            store.clearUser();
-            this.$router.push('/home').then(() => {
-              toast.success("Logout successful");
-            });
-          } else if (err.response?.status === 404) toast.error("User not found")
-          else toast.error("Logout failed");
-        });
-    }
-  },
   computed: {
-    drawerList() {
+    getIconTheme(): string {
+      switch (this.theme) {
+        case 'dark':
+          return 'mdi-weather-night';
+        case 'light':
+          return 'mdi-white-balance-sunny';
+        default:
+          return '';
+      }
+    },
+    locales() {
       return [
-        {title: this.$t('pages.home'), icon: 'mdi-home', to: '/home'},
-        {title: this.$t('pages.books'), icon: 'mdi-book', to: '/books'},
-        {title: this.$t('pages.account'), icon: 'mdi-account', to: '/account'},
+        {title: this.$t('pt'), value: 'pt'},
+        {title: this.$t('en'), value: 'en'},
+        {title: this.$t('es'), value: 'es'},
       ];
     },
-    themeIcon() {
-      return this.darkMode ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent'
+    themes() {
+      return [
+        {title: this.$t('darkTheme'), value: 'dark'},
+        {title: this.$t('lightTheme'), value: 'light'},
+        {title: this.$t('systemTheme'), value: 'system'},
+      ];
     },
-    langIcon() {
-      return this.langBR ? 'BR' : 'EN'
+    drawerList() {
+      return [
+        {title: this.$t('books'), icon: 'mdi-book', to: '/books'},
+        {title: this.$t('reviews'), icon: 'mdi-comment-quote', to: '/myreviews'},
+        {title: this.$t('account'), icon: 'mdi-account', to: '/account'},
+      ];
+    },
+  },
+  methods: {
+    setTheme(theme: string) {
+      if (theme === 'system') {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        } else {
+          theme = 'light';
+        }
+      }
+      this.theme = theme;
+      localStorage.setItem('theme', theme);
+      this.$vuetify.theme.global.name = this.theme;
+    },
+    setLocale(locale: string) {
+      this.locale = locale;
+      i18n.global.locale = locale;
+      localStorage.setItem('locale', locale);
+    },
+    handleAuth(): void {
+      this.isUserLoggedIn ? this.dialogOpen = true : this.$router.push('/login');
     },
   },
   mounted() {
     watch(() => store.user, (newUser, _oldUser) => {
       this.isUserLoggedIn = newUser.id !== -1;
     }, {immediate: true});
-  },
-  watch: {
-    '$route.path': {
-      immediate: true,
-      handler() {
-        const routeItem = this.drawerList.find(item => item.to === this.$route.path);
-        this.title = routeItem?.title ?? 'Library';
-      },
-    },
+
+    watch(() => this.$route.path, () => {
+      const routeItem = this.drawerList.find(item => item.to === this.$route.path);
+      this.title = routeItem?.title ?? 'Library';
+    }, {immediate: true});
   },
 }
 </script>
