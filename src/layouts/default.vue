@@ -53,7 +53,6 @@ import {useAppStore} from "../stores/app";
 import WaveComponent from "../components/layout/Waves.vue";
 import DialogConfirm from "../components/utils/dialogConfirm.vue";
 import {i18n} from "../plugins/i18n";
-import vuetify from "../plugins/vuetify";
 
 const store = useAppStore();
 
@@ -67,12 +66,10 @@ export default {
     isUserLoggedIn: false,
     dialogOpen: false,
     title: null,
-    theme: localStorage.getItem('theme') ?? 'light',
-    locale: localStorage.getItem('locale') ?? 'en',
   }),
   computed: {
     getIconTheme(): string {
-      switch (this.theme) {
+      switch (localStorage.getItem('theme')) {
         case 'dark':
           return 'mdi-weather-night';
         case 'light':
@@ -112,12 +109,10 @@ export default {
           theme = 'light';
         }
       }
-      this.theme = theme;
+      this.$vuetify.theme.global.name = theme;
       localStorage.setItem('theme', theme);
-      this.$vuetify.theme.global.name = this.theme;
     },
     setLocale(locale: string) {
-      this.locale = locale;
       i18n.global.locale = locale;
       localStorage.setItem('locale', locale);
     },

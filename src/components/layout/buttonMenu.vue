@@ -1,7 +1,7 @@
 <template>
   <v-menu>
     <template v-slot:activator="{ props }">
-      <v-btn :icon="icon" v-bind="props"/>
+      <v-btn :icon="icon" v-bind="props" class="ml-1 mr-1"/>
     </template>
     <v-list>
       <v-list-subheader v-if="showSubheader" class=" font-weight-black">{{ subheader }}</v-list-subheader>
