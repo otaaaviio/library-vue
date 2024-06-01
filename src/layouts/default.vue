@@ -1,6 +1,19 @@
 <template>
   <v-app id="inspire">
-    <dialog-confirm :dialogOpen="dialogOpen" :title="title" :on-click="function () {}"/>
+    <v-dialog v-model="dialogOpen" max-width="500">
+      <v-card :title="$t('logout')">
+        <v-card-text>
+          {{ $t('dialogConfirm') }}
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            :text="$t('confirm')"
+            @click="logout"
+          ></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>{{ title }}</v-app-bar-title>
@@ -50,15 +63,15 @@
 
 <script lang="ts">
 import {useAppStore} from "../stores/app";
+import {useAuthStore} from "../stores/auth";
 import WaveComponent from "../components/layout/Waves.vue";
-import DialogConfirm from "../components/utils/dialogConfirm.vue";
 import {i18n} from "../plugins/i18n";
 
-const store = useAppStore();
+const appStore = useAppStore();
+const authStore = useAuthStore();
 
 export default {
   components: {
-    DialogConfirm,
     WaveComponent,
   },
   data: () => ({
@@ -95,7 +108,7 @@ export default {
     drawerList() {
       return [
         {title: this.$t('books'), icon: 'mdi-book', to: '/books'},
-        {title: this.$t('reviews'), icon: 'mdi-comment-quote', to: '/myreviews'},
+        {title: this.$t('myReviews'), icon: 'mdi-comment-quote', to: '/myreviews'},
         {title: this.$t('account'), icon: 'mdi-account', to: '/account'},
       ];
     },
@@ -119,9 +132,13 @@ export default {
     handleAuth(): void {
       this.isUserLoggedIn ? this.dialogOpen = true : this.$router.push('/login');
     },
+    logout() {
+      this.dialogOpen = false;
+      return authStore.logout();
+    }
   },
   mounted() {
-    watch(() => store.user, (newUser, _oldUser) => {
+    watch(() => appStore.user, (newUser, _oldUser) => {
       this.isUserLoggedIn = newUser.id !== -1;
     }, {immediate: true});
 

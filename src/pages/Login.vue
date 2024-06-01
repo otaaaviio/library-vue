@@ -7,15 +7,14 @@
             <v-window-item :value="1">
               <v-row>
                 <sig-in-form/>
-
                 <v-col cols="12" md="6" class="rounded-bl-xl bg-light-blue">
                   <div style="  text-align: center; padding: 180px 0;">
                     <v-card-text class="white--text">
-                      <h3 class="text-center ">{{ $t('loginPage.dontHaveAccount') }}</h3>
-                      <h5 class="text-center" v-html="$t('loginPage.letsGetYouSetUp')"/>
+                      <h3 class="text-center ">{{ $t('dontHaveAccount') }}</h3>
+                      <h5 class="text-center" v-html="$t('letsGetYouSetUp')"/>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn tile outlined dark @click="step++">{{ $t('loginPage.signUp') }}</v-btn>
+                      <v-btn tile outlined dark @click="step++">{{ $t('register') }}</v-btn>
                     </div>
                   </div>
                 </v-col>
@@ -26,11 +25,11 @@
                 <v-col cols="12" md="6" class="bg-light-blue rounded-br-xl">
                   <div style="  text-align: center; padding: 180px 0;">
                     <v-card-text class="white--text">
-                      <h3 class="text-center ">{{ $t('loginPage.alreadySignedUp') }}</h3>
-                      <h5 class="text-center" v-html="$t('loginPage.signInToRegister')"/>
+                      <h3 class="text-center ">{{ $t('alreadySignedUp') }}</h3>
+                      <h5 class="text-center" v-html="$t('letsGetYouIn')"/>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn tile outlined dark @click="step--">{{ $t('loginPage.logIn') }}</v-btn>
+                      <v-btn tile outlined dark @click="step--">{{ $t('login') }}</v-btn>
                     </div>
                   </div>
                 </v-col>
@@ -54,7 +53,7 @@ export default {
     sigInForm: sigInForm
   },
   data: () => ({
-    step: 1
+    step: 2
   }),
   props: {
     source: String

@@ -9,7 +9,7 @@
     <v-row class=" ml-1 d-flex justify-center flex-column">
       <v-card-title>{{ getNameRefactored(book.title) }}</v-card-title>
       <v-card-subtitle> {{ book.author }}</v-card-subtitle>
-      <v-card-text class="pb-1"> {{ book.category }}</v-card-text>
+      <v-card-text class="pb-1"> {{ getCategoryTranslated(book.category) }}</v-card-text>
       <v-container class="rating">
         <star-rating
           :increment="0.5"
@@ -28,6 +28,7 @@
 
 <script>
 import StarRating from 'vue-star-rating'
+import {i18n} from "../../plugins/i18n";
 
 export default {
   components: {
@@ -44,6 +45,9 @@ export default {
     }
   },
   methods: {
+    getCategoryTranslated(category) {
+      return i18n.global.t(`${category.toLowerCase()}`);
+    },
     getNameRefactored(name) {
       if (name.length > 15) {
         const words = name.split(' ');

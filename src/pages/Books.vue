@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-container class="d-flex justify-end">
-    <v-btn :disabled="!isLogged()" class="translateY">{{ $t('words.new') }} {{ $t('model.book') }}</v-btn>
+    <v-btn :disabled="!isLogged()" class="translateY">{{ $t('newBook') }}</v-btn>
     </v-container>
       <v-row>
       <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">

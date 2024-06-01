@@ -11,7 +11,13 @@ enum CategoryEnum {
   POETRY = 'POETRY',
 }
 
+interface ICategory {
+  id: number;
+  name: string;
+}
+
 class CategoryEnumHelper {
+  // arruma essa daqui
   static getLabel(category: CategoryEnum): string {
     switch (category) {
       case CategoryEnum.FANTASY:
@@ -43,17 +49,14 @@ class CategoryEnumHelper {
     return Object.values(CategoryEnum);
   }
 
-  static getLabels(): string[] {
-    return this.getValues().map((category) => this.getLabel(category));
-  }
-
-  static getId(category: CategoryEnum): number {
-    return this.getValues().indexOf(category);
-  }
-
-  static getRandomId(): number {
-    return Math.floor(Math.random() * this.getValues().length) + 1;
+  getList(): ICategory[] {
+    return this.getValues().map(
+      (category, index) => ({
+        id: index + 1,
+        name: this.getLabel(category)
+      })
+    );
   }
 }
 
-export { CategoryEnum, CategoryEnumHelper };
+export {CategoryEnum, CategoryEnumHelper};
