@@ -7,13 +7,13 @@
         <v-row cols="6" class="align-baseline">
           <v-card-title class="headline font-weight-black text-h1 pa-0">404</v-card-title>
           <v-col>
-            <v-card-title class="pa-0">{{ $t('notFound.title') }}</v-card-title>
+            <v-card-title class="pa-0">Page Not Found</v-card-title>
           </v-col>
         </v-row>
         <v-card-text class="pa-0 mt-5 mb-5">
-          {{ $t('notFound.subtitle') }}
+          {{ $t('notFoundSubtitle') }}
         </v-card-text>
-        <v-btn class="btn" @click="goBack">{{ $t('notFound.backToHome') }}</v-btn>
+        <v-btn class="btn" @click="goBack">{{ $t('backToHome') }}</v-btn>
       </v-col>
     </v-row>
   </v-container>
