@@ -8,8 +8,8 @@
     :type="showPassword ? 'text' : 'password'"
     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
     :rules="[
-        () => !!password || $t('passwordRequired'),
-        () => password.length >= 6 || $t('passwordLength'),
+        () => !!password || !required || $t('passwordRequired'),
+        () => password.length >= 6 || !required || $t('passwordLength'),
     ]"
   />
 </template>
@@ -29,6 +29,10 @@ export default {
       type: String,
       default: null
     },
+    required: {
+      type: Boolean,
+      default: true
+    }
   }
 }
 </script>

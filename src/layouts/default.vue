@@ -110,6 +110,7 @@ export default {
       return [
         {title: this.$t('books'), icon: 'mdi-book', to: '/books'},
         {title: this.$t('myReviews'), icon: 'mdi-comment-quote', to: '/myreviews'},
+        {title: this.$t('listToRead'), icon: 'mdi-format-list-bulleted', to: '/listToRead'},
         {title: this.$t('account'), icon: 'mdi-account', to: '/account'},
       ];
     },

@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="10">
-        <v-card class="elevation-6 mt-10">
+        <v-card class="elevation-6 mt-10 z-index-2">
           <v-window v-model="step">
             <v-window-item :value="1">
               <v-row>
@@ -53,7 +53,7 @@ export default {
     sigInForm: sigInForm
   },
   data: () => ({
-    step: 2
+    step: 1
   }),
   props: {
     source: String

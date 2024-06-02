@@ -8,7 +8,7 @@
         <book-card
           :loading="false"
           :book="book"
-          class="position-relative book-card translateY cursor-pointer"
+          class="position-relative z-index-2 translateY cursor-pointer"
           @click="console.log('implementar')"
         />
       </v-col>
@@ -17,7 +17,7 @@
       v-model="currentPage"
       :length="totalPages"
       rounded
-      class="pagination"
+      class="pagination z-index-2"
     />
   </v-container>
 </template>
@@ -77,13 +77,9 @@ export default {
 </script>
 
 <style scoped>
-.book-card {
-  z-index: 2;
-}
 
 .pagination {
   position: relative;
   margin: 50px 0 50px 0;
-  z-index: 2;
 }
 </style>
