@@ -1,12 +1,12 @@
 <template>
   <v-container>
+    <new-book :active="sheet" :handleSheet="handleSheet" />
     <v-container class="d-flex justify-end">
-    <v-btn :disabled="!isLogged()" class="translateY">{{ $t('newBook') }}</v-btn>
+    <v-btn :disabled="isLogged()" class="translateY" @click="handleSheet">{{ $t('newBook') }}</v-btn>
     </v-container>
       <v-row>
       <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">
         <book-card
-          :loading="false"
           :book="book"
           class="position-relative z-index-2 translateY cursor-pointer"
           @click="console.log('implementar')"
@@ -25,15 +25,20 @@
 <script lang="ts">
 import axios from "axios";
 import {useAppStore} from "../stores/app";
+import NewBook from "../components/book/NewBook.vue";
 
 const store = useAppStore();
 
 export default {
+  components: {
+    NewBook,
+  },
   data() {
     return {
       books: [],
       totalPages: 0,
       currentPage: 1,
+      sheet: false,
     };
   },
   mounted() {
@@ -71,6 +76,9 @@ export default {
         })
         .catch((err) => {
         });
+    },
+    handleSheet() {
+      this.sheet = !this.sheet;
     },
   },
 }

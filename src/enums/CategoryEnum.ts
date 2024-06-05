@@ -1,3 +1,5 @@
+import {i18n} from "../plugins/i18n";
+
 enum CategoryEnum {
   FANTASY = 'FANTASY',
   SCIENCE_FICTION = 'SCIENCE_FICTION',
@@ -12,34 +14,33 @@ enum CategoryEnum {
 }
 
 interface ICategory {
-  id: number;
-  name: string;
+  value: number;
+  title: string;
 }
 
 class CategoryEnumHelper {
-  // arruma essa daqui
   static getLabel(category: CategoryEnum): string {
     switch (category) {
       case CategoryEnum.FANTASY:
-        return 'Fantasy';
+        return i18n.global.t('fantasy');
       case CategoryEnum.SCIENCE_FICTION:
-        return 'Science Fiction';
+        return i18n.global.t('science fiction');
       case CategoryEnum.MYSTERY:
-        return 'Mystery';
+        return i18n.global.t('mystery');
       case CategoryEnum.ROMANCE:
-        return 'Romance';
+        return i18n.global.t('romance');
       case CategoryEnum.HORROR:
-        return 'Horror';
+        return i18n.global.t('horror');
       case CategoryEnum.THRILLER:
-        return 'Thriller';
+        return i18n.global.t('thriller');
       case CategoryEnum.HISTORICAL_FICTION:
-        return 'Historical Fiction';
+        return i18n.global.t('historical fiction');
       case CategoryEnum.BIOGRAPHY:
-        return 'Biography';
+        return i18n.global.t('biography');
       case CategoryEnum.SELF_HELP:
-        return 'Self Help';
+        return i18n.global.t('self help');
       case CategoryEnum.POETRY:
-        return 'Poetry';
+        return i18n.global.t('poetry');
       default:
         return 'Unknown';
     }
@@ -49,11 +50,11 @@ class CategoryEnumHelper {
     return Object.values(CategoryEnum);
   }
 
-  getList(): ICategory[] {
+  static getList(): ICategory[] {
     return this.getValues().map(
       (category, index) => ({
-        id: index + 1,
-        name: this.getLabel(category)
+        value: index + 1,
+        title: this.getLabel(category)
       })
     );
   }

@@ -67,5 +67,23 @@
   "translations": "Traduções",
   "userAlreadyExists": "Usuário já existe!",
   "userNotFound": "Usuário não encontrado!",
+  "user": "Usuário",
+  "category": "Categoria",
+  "published at": "Publicado em",
+  "search": "Buscar",
+  "registerNewBook": "Registre um novo livro na biblioteca",
+  "cancel": "Cancelar",
+  "file input": "Selecione imagens do livro",
+  "items per page": "Itens por página",
+  "title": "Título",
+  "description": "Descrição",
+
+  "by": "Por",
+  "author": "Autor",
+  "publisher": "Editora",
+  "registered by": "registrado por",
+
+  "comment": "Comentário",
+  "rating": "Avaliação",
   "license": "Licença MIT"
 }

@@ -11,6 +11,7 @@
             <v-form class="d-flex justify-center align-center" @submit.prevent="signUpSubmit" ref="form">
               <v-col>
                 <v-text-field
+                  variant="outlined"
                   :label="$t('name')"
                   outlined
                   v-model="user.name"
@@ -20,6 +21,7 @@
                 />
                 <v-text-field
                   label="Email"
+                  variant="outlined"
                   outlined
                   v-model="user.email"
                   dense

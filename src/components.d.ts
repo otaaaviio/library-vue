@@ -13,11 +13,13 @@ declare module 'vue' {
     ButtonMenu: typeof import('./components/layout/buttonMenu.vue')['default']
     DialogConfirm: typeof import('./components/utils/dialogConfirm.vue')['default']
     GoogleBtn: typeof import('./components/login/googleBtn.vue')['default']
-    InputPassword: typeof import('./components/login/inputPassword.vue')['default']
+    InputPassword: typeof import('./components/utils/inputPassword.vue')['default']
+    NewBook: typeof import('./components/book/NewBook.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignInForm: typeof import('./components/login/SignInForm.vue')['default']
     SignUpForm: typeof import('./components/login/SignUpForm.vue')['default']
+    TableList: typeof import('./components/utils/tableList.vue')['default']
     Waves: typeof import('./components/layout/Waves.vue')['default']
   }
 }

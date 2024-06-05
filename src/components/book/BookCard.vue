@@ -1,6 +1,5 @@
 <template>
   <v-card
-    :loading="isLoading"
     elevation="5"
     height="350"
     width="220"
@@ -39,10 +38,6 @@ export default {
       type: Object,
       default: null,
     },
-    isLoading: {
-      type: Boolean,
-      default: true,
-    }
   },
   methods: {
     getCategoryTranslated(category) {

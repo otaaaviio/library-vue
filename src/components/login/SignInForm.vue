@@ -12,6 +12,7 @@
               label="Email"
               outlined
               dense
+              variant="outlined"
               color="blue"
               autocomplete="false"
               class="mt-16"
@@ -41,7 +42,7 @@
 <script lang="ts">
 import 'vue3-toastify/dist/index.css';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import InputPassword from "./inputPassword.vue";
+import InputPassword from "../utils/inputPassword.vue";
 import {useAuthStore} from "../../stores/auth";
 
 const authStore = useAuthStore();

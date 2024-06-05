@@ -1,6 +1,7 @@
 <template>
   <v-text-field
     :label="label"
+    variant="outlined"
     outlined
     dense
     color="blue"

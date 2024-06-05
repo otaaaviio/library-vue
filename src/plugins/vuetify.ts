@@ -27,7 +27,4 @@ export default createVuetify({
       },
     },
   },
-  icons: {
-    iconfont: 'fab',
-  }
 })

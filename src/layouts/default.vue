@@ -71,6 +71,7 @@ const appStore = useAppStore();
 const authStore = useAuthStore();
 
 export default {
+  name: 'DefaultLayout',
   components: {
     WaveComponent,
   },

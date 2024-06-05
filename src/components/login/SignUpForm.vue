@@ -9,6 +9,7 @@
         <v-col cols="12" sm="8">
           <v-text-field
             :label="$t('name')"
+            variant="outlined"
             outlined
             v-model="user.name"
             dense
@@ -17,6 +18,7 @@
           />
           <v-text-field
             label="Email"
+            variant="outlined"
             outlined
             v-model="user.email"
             dense

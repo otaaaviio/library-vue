@@ -19,3 +19,15 @@
 .z-index-2 {
     z-index: 2;
 }
+
+.desktop-padding {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .desktop-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
