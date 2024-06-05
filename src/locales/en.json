@@ -70,8 +70,17 @@
   "description": "Description",
   "cancel": "Cancel",
   "file input": "Select book images",
+  "mark as read": "Mark as read",
+  "mark as unread": "Mark as unread",
+  "remove of list": "Remove from list",
+  "delete": "Delete",
+  "edit": "Edit",
+  "addToReadList": "Add to reading list",
 
+  "book": "Book",
   "items per page": "Items per page",
+  "is read": "Read",
+
   "by": "By",
   "author": "Author",
   "publisher": "Publisher",

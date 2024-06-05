@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <new-book :active="sheet" :handleSheet="handleSheet" />
+      <new-book :active="sheet" :handleSheet="handleSheet"/>
     <v-container class="d-flex justify-end">
-    <v-btn :disabled="isLogged()" class="translateY" @click="handleSheet">{{ $t('newBook') }}</v-btn>
+      <v-btn :disabled="isLogged()" class="translateY" @click="handleSheet">{{ $t('newBook') }}</v-btn>
     </v-container>
-      <v-row>
+    <v-row>
       <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">
         <book-card
           :book="book"

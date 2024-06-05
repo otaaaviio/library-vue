@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <new-book :active="sheet" :handleSheet="handleSheet"/>
     <v-row class="d-flex justify-center align-start mt-5">
       <v-col cols="12" sm="8" md="6" lg="4" xl="3" class="border-thin rounded">
         <v-carousel
@@ -16,8 +17,12 @@
         </v-carousel>
       </v-col>
       <v-col class="pl-7 pr-7">
-        <v-row class="d-flex align-baseline">
+        <v-row class="d-flex align-center justify-md-space-between">
           <h1>{{ book.title }}</h1>
+          <div>
+          <v-btn @click="handleSheet">{{ $t('edit') }}</v-btn>
+          <v-btn class="ml-10" color="red">{{ $t('delete') }}</v-btn>
+          </div>
         </v-row>
         <v-row>
           {{ $t('by') }} {{ book.author }} ({{ $t('author') }}),
@@ -48,8 +53,11 @@
         <v-row class="mb-5 mt-5">
           <v-divider class="border-opacity-25"></v-divider>
         </v-row>
-        <v-row>
+        <v-row class="d-flex justify-end">
           <h5 class="font-weight-regular elevation-3 rounded-lg pa-3">{{ book.description }}</h5>
+          <v-btn class="mt-10">
+            <v-icon class="mr-2">mdi-book-plus</v-icon>
+            {{ $t('addToReadList') }}</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -99,6 +107,7 @@ import {format} from 'date-fns';
 export default {
   data() {
     return {
+      sheet: false,
       book: {
         title: 'The Title Book',
         description: '',
@@ -153,6 +162,9 @@ export default {
     },
   },
   methods: {
+    handleSheet() {
+      this.sheet = !this.sheet;
+    },
     formatDate(date_string: string) {
       const date = new Date(date_string);
       return format(date, 'dd/MM/yyyy');

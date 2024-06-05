@@ -1,6 +1,6 @@
 <template>
   <v-container class="d-flex justify-center align-center">
-    <v-card class="z-index-2 d-flex flex-column" width="800" >
+    <v-card class="z-index-2 d-flex flex-column" width="800">
       <v-card-title class="d-flex align-center">
         <v-text-field
           v-model="search"
@@ -25,14 +25,18 @@
         <template v-slot:item.title="{ item }">
           <a :href="`/books/${item.book.id}`" style="text-decoration:none;">{{ item.book.title }}</a>
         </template>
-        <template v-slot:item.rating="{ item }">
-          <v-rating
-            v-model="item.rating"
-            readonly
-            active-color="amber-darken-1"
-            color="amber-darken-1"
-            density="compact"
-          />
+        <template v-slot:item.is_read="{ item }">
+          <v-btn
+            @click="markAsRead(item)"
+          >
+            <v-icon
+              :icon="item.is_read ? 'mdi-check' : 'mdi-close'"
+              :color="item.is_read ? 'green' : 'red'"
+            />
+          </v-btn>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-btn icon="mdi-delete-outline"/>
         </template>
       </v-data-table>
     </v-card>
@@ -48,6 +52,7 @@ export default {
       headers: [
         {title: '', value: 'book.title', key: 'title'},
         {title: '', value: 'is_read', key: 'is_read'},
+        {title: '', key: 'actions', sortable: false},
       ],
       data: [],
     }
@@ -58,17 +63,22 @@ export default {
     },
   },
   mounted() {
-    this.headers[0].title = this.$t('title');
+    this.headers[0].title = this.$t('book');
     this.headers[1].title = this.$t('is read');
 
-    for(let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
       this.data.push({
         book: {
           title: "Don Quixote" + i,
           id: i,
-        }, is_read: false
+        }, is_read: Math.floor(Math.random() * 2) === 1
       },)
     }
+  },
+  methods: {
+    markAsRead(item) {
+      item.is_read = !item.is_read;
+    },
   }
 }
 </script>

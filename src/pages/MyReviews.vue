@@ -34,6 +34,10 @@
             density="compact"
           />
         </template>
+        <template v-slot:item.actions="{ item }">
+          <v-btn icon="mdi-file-edit-outline"/>
+          <v-btn icon="mdi-delete-outline"/>
+        </template>
       </v-data-table>
     </v-card>
   </v-container>
@@ -49,6 +53,7 @@ export default {
         {title: '', value: 'book.title', key: 'title'},
         {title: '', value: 'comment', key: 'comment'},
         {title: '', value: 'rating', key: 'rating'},
+        {title: '', key: 'actions', sortable: false},
       ],
       data: [],
     }
@@ -59,7 +64,7 @@ export default {
     },
   },
   mounted() {
-    this.headers[0].title = this.$t('title');
+    this.headers[0].title = this.$t('book');
     this.headers[1].title = this.$t('comment');
     this.headers[2].title = this.$t('rating');
 
