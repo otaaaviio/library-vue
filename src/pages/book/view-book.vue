@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <new-book :active="sheet" :handleSheet="handleSheet"/>
+    <manager-book :active="sheet" :handleSheet="handleSheet"/>
     <v-row class="d-flex justify-center align-start mt-5">
       <v-col cols="12" sm="8" md="6" lg="4" xl="3" class="border-thin rounded">
         <v-carousel
@@ -38,6 +38,9 @@
             color="amber-darken-1"
             size="26"
           />
+          <v-btn
+            density="compact"
+          >{{ $t('review') }}</v-btn>
         </v-row>
         <v-row class="d-flex justify-start align-center mt-5">
           <v-col>
@@ -62,7 +65,7 @@
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center mt-10">
-      <v-card flat class="elevation-5 rounded-lg">
+      <v-card flat class="elevation-5 rounded-lg z-index-2">
         <v-card-title class="d-flex align-center pe-2">
           {{ $t('reviews') }}
           <v-spacer></v-spacer>

@@ -25,7 +25,7 @@
 <script lang="ts">
 import {ref, onMounted, watch} from 'vue';
 import {useAppStore, useBookStore, usePaginationStore} from "../../stores";
-import NewBook from "../../components/book/new-book.vue";
+import NewBook from "../../components/book/manager-book.vue";
 import {mapState} from "pinia";
 
 export default {

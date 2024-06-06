@@ -52,6 +52,7 @@
   "registerError": "¡Error al intentar registrar al usuario! Inténtalo de nuevo más tarde.",
   "registerSuccess": "¡Usuario registrado con éxito! Ahora puedes iniciar sesión en tu cuenta.",
   "reviews": "Reseñas",
+  "review": "Reseña",
   "myReviews": "Mis reseñas",
   "notFound": "Página no encontrada",
   "accountOptions": "Puedes cambiar tu información de cuenta aquí.",
@@ -90,6 +91,8 @@
   "thriller": "Thriller",
   "translations": "Traducciones",
   "userAlreadyExists": "¡El usuario ya existe!",
+  "create book success": "¡Libro creado con éxito!",
+  "error creating book": "¡Error al intentar crear el libro! Inténtalo de nuevo más tarde.",
   "userNotFound": "¡Usuario no encontrado!",
   "license": "Licencia MIT"
 }

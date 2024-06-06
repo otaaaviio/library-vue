@@ -2,5 +2,5 @@
 
 - [ ] auth page
 - [ ] books page
-- [ ] book page
+- [x] book page
 - [ ] 

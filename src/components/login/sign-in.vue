@@ -47,23 +47,23 @@ import {ref} from 'vue';
 
 export default {
   components: {InputPassword},
-  setup() {
-    const authStore = useAuthStore();
-    return {authStore};
-  },
   data: () => ({
     user: {
-      email: null,
-      password: null,
+      email: '',
+      password: '',
     },
     showPassword: false,
     form: ref(null)
   }),
+  setup() {
+    const authStore = useAuthStore();
+    return { authStore };
+  },
   methods: {
     async loginSubmit() {
       const validator = await this.$refs.form.validate();
       if (validator.valid) {
-        await authStore.login(this.user);
+        await this.authStore.login(this.user);
       }
     }
   }

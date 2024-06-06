@@ -61,6 +61,7 @@
   "registerError": "Error trying to register user! Try again later.",
   "registerSuccess": "User registered successfully! Now you can log in to your account.",
   "reviews": "Reviews",
+  "review": "Review",
   "search": "Search",
   "myReviews": "My reviews",
   "romance": "Romance",
@@ -90,6 +91,8 @@
   "thriller": "Thriller",
   "translations": "Translations",
   "userAlreadyExists": "User already exists!",
+  "error creating book": "Error trying to register book! Try again later.",
+  "create book success": "Book registered successfully!",
   "userNotFound": "User not found!",
   "license": "MIT License"
 }

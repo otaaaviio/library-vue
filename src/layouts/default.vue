@@ -71,11 +71,6 @@ export default {
   components: {
     WaveComponent,
   },
-  setup() {
-    const appStore = useAppStore();
-    const authStore = useAuthStore();
-    return {appStore, authStore};
-  },
   data: () => ({
     currentTheme: localStorage.getItem('theme') || 'light',
     drawer: null,
@@ -83,6 +78,11 @@ export default {
     dialogOpen: false,
     title: null,
   }),
+  setup() {
+    const appStore = useAppStore();
+    const authStore = useAuthStore();
+    return {appStore, authStore};
+  },
   computed: {
     getIconTheme(): string {
       switch (this.currentTheme) {
@@ -139,7 +139,7 @@ export default {
     },
     async logout() {
       this.dialogOpen = false;
-      await authStore.logout();
+      await this.authStore.logout();
     }
   },
   mounted() {

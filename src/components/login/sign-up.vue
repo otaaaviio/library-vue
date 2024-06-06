@@ -64,10 +64,10 @@ import {useAuthStore} from "../../stores";
 export default {
   data: () => ({
     user: {
-      name: null,
-      email: null,
-      password: null,
-      confirmPassword: null,
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     showPassword: false,
     showConfirmPassword: false,
@@ -80,7 +80,7 @@ export default {
   methods: {
     async signUpSubmit() {
       if (this.verifyInputs()) {
-        await authStore.register(this.user)
+        await this.authStore.register(this.user)
           .then(() => {
             this.$emit('success');
           });
