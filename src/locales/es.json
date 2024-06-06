@@ -50,7 +50,7 @@
   "nameInvalid": "¡Nombre inválido!",
   "register": "Registrarse",
   "registerError": "¡Error al intentar registrar al usuario! Inténtalo de nuevo más tarde.",
-  "registerSuccess": "¡Usuario registrado con éxito!",
+  "registerSuccess": "¡Usuario registrado con éxito! Ahora puedes iniciar sesión en tu cuenta.",
   "reviews": "Reseñas",
   "myReviews": "Mis reseñas",
   "notFound": "Página no encontrada",

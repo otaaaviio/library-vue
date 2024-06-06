@@ -63,12 +63,11 @@
 
 <script lang="ts">
 import {useAppStore} from "../stores/app";
-import {useAuthStore} from "../stores/auth";
 import WaveComponent from "../components/layout/Waves.vue";
 import {i18n} from "../plugins/i18n";
+import auth from "../api/auth";
 
-const appStore = useAppStore();
-const authStore = useAuthStore();
+const store = useAppStore();
 
 export default {
   name: 'DefaultLayout',
@@ -136,13 +135,13 @@ export default {
     handleAuth(): void {
       this.isUserLoggedIn ? this.dialogOpen = true : this.$router.push('/login');
     },
-    logout() {
+    async logout() {
       this.dialogOpen = false;
-      return authStore.logout();
+      await auth.actions.logout();
     }
   },
   mounted() {
-    watch(() => appStore.user, (newUser, _oldUser) => {
+    watch(() => store.user, (newUser, _oldUser) => {
       this.isUserLoggedIn = newUser.id !== -1;
     }, {immediate: true});
 

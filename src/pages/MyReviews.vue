@@ -35,8 +35,8 @@
           />
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-btn icon="mdi-file-edit-outline"/>
-          <v-btn icon="mdi-delete-outline"/>
+          <v-btn icon="mdi-file-edit-outline" elevation="0"/>
+          <v-btn icon="mdi-delete-outline" elevation="0" class="ml-4"/>
         </template>
       </v-data-table>
     </v-card>

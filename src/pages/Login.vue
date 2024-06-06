@@ -33,7 +33,7 @@
                     </div>
                   </div>
                 </v-col>
-                <sig-up-form/>
+                <sig-up-form @success="handleRegisterSuccess"/>
               </v-row>
             </v-window-item>
           </v-window>
@@ -58,6 +58,11 @@ export default {
   props: {
     source: String
   },
+  methods: {
+    handleRegisterSuccess() {
+      this.step = 1;
+    },
+  }
 }
 </script>
 

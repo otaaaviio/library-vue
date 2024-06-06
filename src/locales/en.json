@@ -59,7 +59,7 @@
   "comment": "Comment",
   "rating": "Rating",
   "registerError": "Error trying to register user! Try again later.",
-  "registerSuccess": "User successfully registered!",
+  "registerSuccess": "User registered successfully! Now you can log in to your account.",
   "reviews": "Reviews",
   "search": "Search",
   "myReviews": "My reviews",

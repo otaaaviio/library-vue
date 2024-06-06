@@ -28,6 +28,8 @@
         <template v-slot:item.is_read="{ item }">
           <v-btn
             @click="markAsRead(item)"
+            :disabled="item.disabled"
+            elevation="0"
           >
             <v-icon
               :icon="item.is_read ? 'mdi-check' : 'mdi-close'"
@@ -36,7 +38,7 @@
           </v-btn>
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-btn icon="mdi-delete-outline"/>
+          <v-btn icon="mdi-delete-outline" elevation="0"/>
         </template>
       </v-data-table>
     </v-card>
@@ -71,14 +73,20 @@ export default {
         book: {
           title: "Don Quixote" + i,
           id: i,
-        }, is_read: Math.floor(Math.random() * 2) === 1
-      },)
+        },
+        is_read: Math.floor(Math.random() * 2) === 1,
+        disabled: false
+      })
     }
   },
   methods: {
     markAsRead(item) {
       item.is_read = !item.is_read;
+      item.disabled = true;
+      setTimeout(() => {
+        item.disabled = false;
+      }, 2000);
     },
-  }
+  },
 }
 </script>

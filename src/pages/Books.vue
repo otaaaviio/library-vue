@@ -2,14 +2,14 @@
   <v-container>
       <new-book :active="sheet" :handleSheet="handleSheet"/>
     <v-container class="d-flex justify-end">
-      <v-btn :disabled="isLogged()" class="translateY" @click="handleSheet">{{ $t('newBook') }}</v-btn>
+      <v-btn :disabled="!isLogged()" class="translateY" @click="handleSheet">{{ $t('newBook') }}</v-btn>
     </v-container>
     <v-row>
       <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">
         <book-card
           :book="book"
           class="position-relative z-index-2 translateY cursor-pointer"
-          @click="console.log('implementar')"
+          @click="() => $router.push('/books/' + book.id)"
         />
       </v-col>
     </v-row>
@@ -26,6 +26,7 @@
 import axios from "axios";
 import {useAppStore} from "../stores/app";
 import NewBook from "../components/book/NewBook.vue";
+import books from "../api/books";
 
 const store = useAppStore();
 
@@ -54,18 +55,7 @@ export default {
       return store.user?.id !== -1;
     },
     async fetchBooks() {
-      await axios.get(`http://localhost:4000/books`, {
-        params: {
-          page: this.currentPage,
-          items_per_page: 12,
-        }
-      })
-        .then((res) => {
-          this.books = res.data.data;
-          this.totalPages = res.data.pagination.total_pages;
-        })
-        .catch((err) => {
-        });
+      await books.actions.index();
     },
     async authors() {
       await axios.get(`http://localhost:4000/authors`, {

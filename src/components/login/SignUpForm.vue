@@ -60,6 +60,7 @@
 
 <script lang="ts">
 import {toast} from "vue3-toastify";
+import auth from "../../api/auth";
 
 export default {
   data: () => ({
@@ -76,6 +77,10 @@ export default {
   methods: {
     async signUpSubmit() {
       if (this.verifyInputs()) {
+        await auth.actions.register(this.user)
+          .then(() => {
+            this.$emit('success');
+          });
       }
     },
     verifyInputs(): boolean {
