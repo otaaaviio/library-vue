@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia';
-import {IUser} from "../interfaces/User";
+import {IUser} from "../interfaces/user";
 
 export const useAppStore = defineStore('app', {
   state: () => ({

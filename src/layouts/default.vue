@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import {useAppStore, useAuthStore} from "../stores";
-import WaveComponent from "../components/layout/Waves.vue";
+import WaveComponent from "../components/layout/waves.vue";
 import {i18n} from "../plugins/i18n";
 
 const appStore = useAppStore();

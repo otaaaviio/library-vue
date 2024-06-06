@@ -1,7 +1,7 @@
 import API from "../api";
 import {defineStore} from "pinia";
 import {usePaginationStore} from "./pagination";
-import {IBook} from "../interfaces/Book";
+import {IBook} from "../interfaces/book";
 
 const pagStore = usePaginationStore();
 

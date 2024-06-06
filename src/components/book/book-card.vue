@@ -4,29 +4,28 @@
     height="350"
     width="220"
   >
-    <v-img height="220" :src="book.image_path"></v-img>
+    <v-img height="220" :src="book.image_path"/>
     <v-row class=" ml-1 d-flex justify-center flex-column">
       <v-card-title>{{ getNameRefactored(book.title) }}</v-card-title>
-      <v-card-subtitle> {{ book.author }}</v-card-subtitle>
+      <v-card-subtitle>{{ book.author }}</v-card-subtitle>
       <v-card-text class="pb-1"> {{ getCategoryTranslated(book.category) }}</v-card-text>
       <v-container class="rating">
         <star-rating
           :increment="0.5"
           :rating="book.avg_rating"
           read-only
-          :star-size="19"
+          :star-size="15"
           :show-rating="false"
-          class="pl-4 mr-1"/>
-        ({{ book.review_count }})
+          class="pl-4 mr-1"
+        />
+        <h5>({{ book.review_count }})</h5>
       </v-container>
-    </v-row>
-    <v-row class="d-flex justify-end pr-4">
     </v-row>
   </v-card>
 </template>
 
 <script>
-import StarRating from 'vue-star-rating'
+import StarRating from 'vue-star-rating';
 import {i18n} from "../../plugins/i18n";
 
 export default {
@@ -36,7 +35,7 @@ export default {
   props: {
     book: {
       type: Object,
-      default: null,
+      default: [],
     },
   },
   methods: {
@@ -58,12 +57,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.rating {
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-</style>

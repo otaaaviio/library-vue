@@ -80,17 +80,15 @@
   "title": "Título",
   "description": "Descrição",
   "mark as read": "Marcar como lido",
-    "mark as unread": "Marcar como não lido",
-    "remove of list": "Remover da lista",
+  "mark as unread": "Marcar como não lido",
+  "remove of list": "Remover da lista",
   "delete": "Deletar",
-    "edit": "Editar",
+  "edit": "Editar",
   "addToReadList": "Adicionar à lista de leitura",
-
   "by": "Por",
   "author": "Autor",
   "publisher": "Editora",
   "registered by": "registrado por",
-
   "comment": "Comentário",
   "rating": "Avaliação",
   "license": "Licença MIT"

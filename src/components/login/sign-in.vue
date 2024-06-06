@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import 'vue3-toastify/dist/index.css';
-import InputPassword from "../utils/inputPassword.vue";
+import InputPassword from "../utils/input-password.vue";
 import {useAuthStore} from "../../stores";
 import { ref } from 'vue';
 

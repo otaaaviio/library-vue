@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router/auto'
 import {setupLayouts} from 'virtual:generated-layouts'
-import notFound from "../pages/NotFound.vue";
-import ViewBook from "../pages/ViewBook.vue";
+import notFound from "../pages/not-found.vue";
+import ViewBook from "../pages/book/view-book.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

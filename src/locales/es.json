@@ -62,7 +62,6 @@
   "title": "Título",
   "description": "Descripción",
   "cancel": "Cancelar",
-
   "search": "Buscar",
   "by": "Por",
   "author": "Autor",
@@ -74,7 +73,6 @@
   "delete": "Eliminar",
   "edit": "Editar",
   "addToReadList": "Agregar a la lista de lectura",
-
   "book": "Libro",
   "is read": "Leído",
   "items per page": "Elementos por página",

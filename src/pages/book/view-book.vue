@@ -101,7 +101,7 @@
 </template>
 
 <script lang="ts">
-import {i18n} from "../plugins/i18n";
+import {i18n} from "../../plugins/i18n";
 import {format} from 'date-fns';
 
 export default {

@@ -50,13 +50,11 @@
           </v-card-text>
         </v-col>
       </v-card>
-
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
-
 export default {
   data: () => ({
     user: {
@@ -76,7 +74,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 

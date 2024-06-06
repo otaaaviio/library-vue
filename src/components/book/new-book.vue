@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts">
-import {CategoryEnumHelper} from "@/enums/CategoryEnum";
+import {CategoryEnumHelper} from "../../enums/category";
 
 export default {
   props: {

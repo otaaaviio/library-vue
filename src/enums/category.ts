@@ -1,6 +1,7 @@
 import {i18n} from "../plugins/i18n";
+import {ICategory} from "../interfaces/category";
 
-enum CategoryEnum {
+export enum Category {
   FANTASY = 'FANTASY',
   SCIENCE_FICTION = 'SCIENCE_FICTION',
   MYSTERY = 'MYSTERY',
@@ -13,41 +14,36 @@ enum CategoryEnum {
   POETRY = 'POETRY',
 }
 
-interface ICategory {
-  value: number;
-  title: string;
-}
-
-class CategoryEnumHelper {
-  static getLabel(category: CategoryEnum): string {
+export class CategoryEnumHelper {
+  static getLabel(category: Category): string {
     switch (category) {
-      case CategoryEnum.FANTASY:
+      case Category.FANTASY:
         return i18n.global.t('fantasy');
-      case CategoryEnum.SCIENCE_FICTION:
+      case Category.SCIENCE_FICTION:
         return i18n.global.t('science fiction');
-      case CategoryEnum.MYSTERY:
+      case Category.MYSTERY:
         return i18n.global.t('mystery');
-      case CategoryEnum.ROMANCE:
+      case Category.ROMANCE:
         return i18n.global.t('romance');
-      case CategoryEnum.HORROR:
+      case Category.HORROR:
         return i18n.global.t('horror');
-      case CategoryEnum.THRILLER:
+      case Category.THRILLER:
         return i18n.global.t('thriller');
-      case CategoryEnum.HISTORICAL_FICTION:
+      case Category.HISTORICAL_FICTION:
         return i18n.global.t('historical fiction');
-      case CategoryEnum.BIOGRAPHY:
+      case Category.BIOGRAPHY:
         return i18n.global.t('biography');
-      case CategoryEnum.SELF_HELP:
+      case Category.SELF_HELP:
         return i18n.global.t('self help');
-      case CategoryEnum.POETRY:
+      case Category.POETRY:
         return i18n.global.t('poetry');
       default:
         return 'Unknown';
     }
   }
 
-  static getValues(): CategoryEnum[] {
-    return Object.values(CategoryEnum);
+  static getValues(): Category[] {
+    return Object.values(Category);
   }
 
   static getList(): ICategory[] {
@@ -59,5 +55,3 @@ class CategoryEnumHelper {
     );
   }
 }
-
-export {CategoryEnum, CategoryEnumHelper};

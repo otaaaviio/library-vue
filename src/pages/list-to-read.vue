@@ -1,6 +1,6 @@
 <template>
   <v-container class="d-flex justify-center align-center">
-    <v-card class="z-index-2 d-flex flex-column" width="800" >
+    <v-card class="z-index-2 d-flex flex-column" width="800">
       <v-card-title class="d-flex align-center">
         <v-text-field
           v-model="search"
@@ -25,18 +25,20 @@
         <template v-slot:item.title="{ item }">
           <a :href="`/books/${item.book.id}`" style="text-decoration:none;">{{ item.book.title }}</a>
         </template>
-        <template v-slot:item.rating="{ item }">
-          <v-rating
-            v-model="item.rating"
-            readonly
-            active-color="amber-darken-1"
-            color="amber-darken-1"
-            density="compact"
-          />
+        <template v-slot:item.is_read="{ item }">
+          <v-btn
+            @click="markAsRead(item)"
+            :disabled="item.disabled"
+            elevation="0"
+          >
+            <v-icon
+              :icon="item.is_read ? 'mdi-check' : 'mdi-close'"
+              :color="item.is_read ? 'green' : 'red'"
+            />
+          </v-btn>
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-btn icon="mdi-file-edit-outline" elevation="0"/>
-          <v-btn icon="mdi-delete-outline" elevation="0" class="ml-4"/>
+          <v-btn icon="mdi-delete-outline" elevation="0"/>
         </template>
       </v-data-table>
     </v-card>
@@ -44,15 +46,13 @@
 </template>
 
 <script lang="ts">
-
 export default {
   data() {
     return {
       search: '',
       headers: [
         {title: '', value: 'book.title', key: 'title'},
-        {title: '', value: 'comment', key: 'comment'},
-        {title: '', value: 'rating', key: 'rating'},
+        {title: '', value: 'is_read', key: 'is_read'},
         {title: '', key: 'actions', sortable: false},
       ],
       data: [],
@@ -65,17 +65,27 @@ export default {
   },
   mounted() {
     this.headers[0].title = this.$t('book');
-    this.headers[1].title = this.$t('comment');
-    this.headers[2].title = this.$t('rating');
+    this.headers[1].title = this.$t('is read');
 
-    for(let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
       this.data.push({
         book: {
           title: "Don Quixote" + i,
           id: i,
-        }, comment: "Miguel de Cervantes", rating: Math.floor(Math.random() * 5 + 1)
-      },)
+        },
+        is_read: Math.floor(Math.random() * 2) === 1,
+        disabled: false
+      })
     }
-  }
+  },
+  methods: {
+    markAsRead(item) {
+      item.is_read = !item.is_read;
+      item.disabled = true;
+      setTimeout(() => {
+        item.disabled = false;
+      }, 2000);
+    },
+  },
 }
 </script>

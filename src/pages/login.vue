@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts">
-import sigUpForm from "../components/login/SignUpForm.vue";
-import sigInForm from "../components/login/SignInForm.vue";
+import sigUpForm from "../components/login/sign-up.vue";
+import sigInForm from "../components/login/sign-in.vue";
 
 export default {
   components: {
