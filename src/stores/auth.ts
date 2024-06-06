@@ -6,18 +6,20 @@ import router from "../router";
 import {defineStore} from "pinia";
 import {ILogin, IRegister} from "../interfaces/auth";
 
-const appStore = useAppStore();
-
 export const useAuthStore = defineStore({
   id: 'auth',
   actions: {
     redirectLogout() {
+      const appStore = useAppStore();
+
       appStore.clearUser();
       router.push('/books').then(() => {
         toast.success(i18n.global.t('logoutSuccess'));
       });
     },
     login(user: ILogin) {
+      const appStore = useAppStore();
+
       API.post(`/sessions/login`, user)
         .then((res) => {
           appStore.setUser(res.data.user);

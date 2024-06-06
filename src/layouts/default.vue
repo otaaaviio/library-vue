@@ -66,13 +66,15 @@ import {useAppStore, useAuthStore} from "../stores";
 import WaveComponent from "../components/layout/waves.vue";
 import {i18n} from "../plugins/i18n";
 
-const appStore = useAppStore();
-const authStore = useAuthStore();
-
 export default {
   name: 'DefaultLayout',
   components: {
     WaveComponent,
+  },
+  setup() {
+    const appStore = useAppStore();
+    const authStore = useAuthStore();
+    return {appStore, authStore};
   },
   data: () => ({
     currentTheme: localStorage.getItem('theme') || 'light',
@@ -109,8 +111,8 @@ export default {
     drawerList() {
       return [
         {title: this.$t('books'), icon: 'mdi-book', to: '/books'},
-        {title: this.$t('myReviews'), icon: 'mdi-comment-quote', to: '/myreviews'},
-        {title: this.$t('listToRead'), icon: 'mdi-format-list-bulleted', to: '/listToRead'},
+        {title: this.$t('myReviews'), icon: 'mdi-comment-quote', to: '/my-reviews'},
+        {title: this.$t('listToRead'), icon: 'mdi-format-list-bulleted', to: '/to-read'},
         {title: this.$t('account'), icon: 'mdi-account', to: '/account'},
       ];
     },
@@ -141,7 +143,7 @@ export default {
     }
   },
   mounted() {
-    watch(() => appStore.user, (newUser, _oldUser) => {
+    watch(() => this.appStore.user, (newUser, _oldUser) => {
       this.isUserLoggedIn = newUser.id !== -1;
     }, {immediate: true});
 

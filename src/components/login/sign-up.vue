@@ -60,7 +60,6 @@
 import {toast} from "vue3-toastify";
 import {useAuthStore} from "../../stores";
 
-const authStore = useAuthStore();
 
 export default {
   data: () => ({
@@ -74,6 +73,10 @@ export default {
     showConfirmPassword: false,
     acceptTerms: false,
   }),
+  setup() {
+    const authStore = useAuthStore();
+    return { authStore };
+  },
   methods: {
     async signUpSubmit() {
       if (this.verifyInputs()) {

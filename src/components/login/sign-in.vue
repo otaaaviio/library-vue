@@ -43,12 +43,14 @@
 import 'vue3-toastify/dist/index.css';
 import InputPassword from "../utils/input-password.vue";
 import {useAuthStore} from "../../stores";
-import { ref } from 'vue';
-
-const authStore = useAuthStore();
+import {ref} from 'vue';
 
 export default {
   components: {InputPassword},
+  setup() {
+    const authStore = useAuthStore();
+    return {authStore};
+  },
   data: () => ({
     user: {
       email: null,

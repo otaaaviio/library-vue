@@ -3,8 +3,6 @@ import {defineStore} from "pinia";
 import {usePaginationStore} from "./pagination";
 import {IBook} from "../interfaces/book";
 
-const pagStore = usePaginationStore();
-
 export const useBookStore = defineStore({
   id: 'book',
   state: () => ({
@@ -15,6 +13,7 @@ export const useBookStore = defineStore({
   },
   actions: {
     index(page) {
+      const pagStore = usePaginationStore();
       API.get(`/books`, {
         params: {
           page: page,
