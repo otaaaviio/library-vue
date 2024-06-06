@@ -1,13 +1,14 @@
 import API from "../api";
 import {defineStore} from "pinia";
 import {usePaginationStore} from "./pagination";
+import {IBook} from "../interfaces/Book";
 
 const pagStore = usePaginationStore();
 
 export const useBookStore = defineStore({
   id: 'book',
   state: () => ({
-    books: [],
+    books: [] as IBook[],
   }),
   getters: {
     getBooks: (state) => state.books,

@@ -5,7 +5,7 @@
       <v-btn :disabled="!isLogged()" class="translateY" @click="handleSheet">{{ $t('newBook') }}</v-btn>
     </v-container>
     <v-row>
-      <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in bookStore.books" :key="book.id" class="d-flex">
+      <v-col cols="auto" sm="6" md="4" lg="2" v-for="book in books" :key="book.id" class="d-flex">
         <book-card
           :book="book"
           class="position-relative z-index-2 translateY cursor-pointer"
@@ -23,13 +23,17 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, watch } from 'vue';
-import { useAppStore, useBookStore, usePaginationStore } from "../stores";
+import {ref, onMounted, watch} from 'vue';
+import {useAppStore, useBookStore, usePaginationStore} from "../stores";
 import NewBook from "../components/book/NewBook.vue";
+import {mapState} from "pinia";
 
 export default {
   components: {
     NewBook,
+  },
+  computed: {
+    ...mapState(useBookStore, ['books']),
   },
   setup() {
     const appStore = useAppStore();
@@ -69,7 +73,6 @@ export default {
       totalPages,
       handleSheet,
       isLogged,
-      bookStore,
     };
   },
 }

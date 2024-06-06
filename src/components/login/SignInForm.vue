@@ -41,7 +41,6 @@
 
 <script lang="ts">
 import 'vue3-toastify/dist/index.css';
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import InputPassword from "../utils/inputPassword.vue";
 import {useAuthStore} from "../../stores";
 import { ref } from 'vue';
@@ -49,7 +48,7 @@ import { ref } from 'vue';
 const authStore = useAuthStore();
 
 export default {
-  components: {InputPassword, FontAwesomeIcon},
+  components: {InputPassword},
   data: () => ({
     user: {
       email: null,

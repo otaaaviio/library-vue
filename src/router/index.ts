@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
   if (to.fullPath === '/')
     next('/books')
 
-  if (!!user_id)
+  if (user_id)
     if (to.fullPath === '/login' && user_id !== -1)
       next('/books')
 
