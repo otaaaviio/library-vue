@@ -1,9 +1,11 @@
-// Utilities
-import { createPinia } from 'pinia'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import {useBookStore} from "./book";
+import {usePaginationStore} from "./pagination";
+import {useAuthStore} from "./auth";
+import {useAppStore} from "./app";
 
-const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
-
-export default pinia;
-
+export {
+  useBookStore,
+  usePaginationStore,
+  useAuthStore,
+  useAppStore
+}

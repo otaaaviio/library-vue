@@ -43,7 +43,10 @@
 import 'vue3-toastify/dist/index.css';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import InputPassword from "../utils/inputPassword.vue";
-import auth from "../../api/auth";
+import {useAuthStore} from "../../stores";
+import { ref } from 'vue';
+
+const authStore = useAuthStore();
 
 export default {
   components: {InputPassword, FontAwesomeIcon},
@@ -53,21 +56,15 @@ export default {
       password: null,
     },
     showPassword: false,
+    form: ref(null)
   }),
   methods: {
     async loginSubmit() {
       const validator = await this.$refs.form.validate();
       if (validator.valid) {
-        await auth.actions.login(this.user)
-
+        await authStore.login(this.user);
       }
     }
   }
 }
 </script>
-
-<style scoped lang="sass">
-
-</style>
-
-

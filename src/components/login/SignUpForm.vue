@@ -13,7 +13,6 @@
             outlined
             v-model="user.name"
             dense
-            autocomplete="false"
             :rules="[() => !!user.name || $t('nameRequired')]"
           />
           <v-text-field
@@ -22,7 +21,6 @@
             outlined
             v-model="user.email"
             dense
-            autocomplete="false"
             :rules="[() => !!user.email || $t('emailRequired'), () => /.+@.+\..+/.test(user.email) || $t('emailInvalid')]"
           />
           <input-password
@@ -60,7 +58,9 @@
 
 <script lang="ts">
 import {toast} from "vue3-toastify";
-import auth from "../../api/auth";
+import {useAuthStore} from "../../stores";
+
+const authStore = useAuthStore();
 
 export default {
   data: () => ({
@@ -77,7 +77,7 @@ export default {
   methods: {
     async signUpSubmit() {
       if (this.verifyInputs()) {
-        await auth.actions.register(this.user)
+        await authStore.register(this.user)
           .then(() => {
             this.$emit('success');
           });

@@ -1,5 +1,5 @@
 import vuetify from './vuetify'
-import pinia from '../stores'
+import pinia from '../stores/pinia'
 import router from '../router'
 import type { App } from 'vue'
 import {i18n} from "./i18n";
