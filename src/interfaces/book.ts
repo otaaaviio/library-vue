@@ -17,3 +17,20 @@ export interface IBookCreate {
   published_at: Date,
   images: string[],
 }
+
+export interface IBookDetailed {
+  id: number,
+  title: string,
+  description: string,
+  author: string,
+  publisher: string,
+  category: string,
+  avgRating: number,
+  createdBy: {
+    id: number,
+    name: string,
+  },
+  published_at: string,
+  images: string[],
+  reviews: [],
+}

@@ -1,7 +1,7 @@
 import API from "../api";
 import {defineStore} from "pinia";
 import {usePaginationStore} from "./pagination";
-import {IBook, IBookCreate} from "../interfaces/book";
+import {IBook, IBookCreate, IBookDetailed} from "../interfaces/book";
 import {toast} from "vue3-toastify";
 import {i18n} from "../plugins/i18n";
 
@@ -9,6 +9,7 @@ export const useBookStore = defineStore({
   id: 'book',
   state: () => ({
     books: [] as IBook[],
+    book: {} as IBookDetailed,
   }),
   getters: {
     getBooks: (state) => state.books,
@@ -32,12 +33,15 @@ export const useBookStore = defineStore({
         });
     },
     show(id: number) {
-      API.get(`/books/${id}`)
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-        });
+      return new Promise((resolve, reject) => {
+        API.get(`/books/${id}`)
+          .then((res) => {
+            this.$state.book = res.data;
+          })
+          .catch(() => {
+            toast.error(i18n.global.t('error fetching book'));
+          });
+      })
     },
     create(book: IBookCreate) {
       return new Promise(async (resolve, reject) => {

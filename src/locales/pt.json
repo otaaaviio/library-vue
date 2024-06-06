@@ -96,6 +96,7 @@
   "error creating book": "Erro ao criar livro! Tente novamente mais tarde.",
     "edit book success": "Livro editado com sucesso!",
     "error editing book": "Erro ao editar livro! Tente novamente mais tarde.",
+  "error fetching book": "Erro ao buscar livro! Tente novamente mais tarde.",
     "delete book success": "Livro deletado com sucesso!",
     "error deleting book": "Erro ao deletar livro! Tente novamente mais tarde.",
     "add to list success": "Livro adicionado à lista com sucesso!",

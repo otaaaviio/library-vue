@@ -20,14 +20,16 @@
         <v-row class="d-flex align-center justify-md-space-between">
           <h1>{{ book.title }}</h1>
           <div>
-          <v-btn @click="handleSheet">{{ $t('edit') }}</v-btn>
-          <v-btn class="ml-10" color="red">{{ $t('delete') }}</v-btn>
+            <v-btn @click="handleSheet">{{ $t('edit') }}</v-btn>
+            <v-btn class="ml-10" color="red">{{ $t('delete') }}</v-btn>
           </div>
         </v-row>
         <v-row>
           {{ $t('by') }} {{ book.author }} ({{ $t('author') }}),
-          {{ book.publisher }} ({{ $t('publisher') }}),
-          {{ $t('registered by') }} {{ book.createdBy.name }} ({{ $t('user') }})
+          {{ book.publisher }} ({{ $t('publisher') }})
+          <template v-if="book.createdBy">
+            , {{ $t('registered by') }} {{ book.createdBy.name }} ({{ $t('user') }})
+          </template>
         </v-row>
         <v-row class="d-flex align-center">
           ({{ book.avgRating }})
@@ -40,7 +42,8 @@
           />
           <v-btn
             density="compact"
-          >{{ $t('review') }}</v-btn>
+          >{{ $t('review') }}
+          </v-btn>
         </v-row>
         <v-row class="d-flex justify-start align-center mt-5">
           <v-col>
@@ -60,7 +63,8 @@
           <h5 class="font-weight-regular elevation-3 rounded-lg pa-3">{{ book.description }}</h5>
           <v-btn class="mt-10">
             <v-icon class="mr-2">mdi-book-plus</v-icon>
-            {{ $t('addToReadList') }}</v-btn>
+            {{ $t('addToReadList') }}
+          </v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -106,30 +110,15 @@
 <script lang="ts">
 import {i18n} from "../../plugins/i18n";
 import {format} from 'date-fns';
+import {useBookStore} from "../../stores";
+import {onMounted} from "vue";
+import { useRoute } from 'vue-router';
+import {mapState} from "pinia";
 
 export default {
   data() {
     return {
       sheet: false,
-      book: {
-        title: 'The Title Book',
-        description: '',
-        author: 'Otavio',
-        publisher: 'Packt',
-        category: 'Horror',
-        avgRating: 4.5,
-        createdBy: {
-          id: 1,
-          name: 'Otavio G'
-        },
-        published_at: '1993-08-01T22:28:23.000Z',
-        images: [
-          '/src/assets/images/default_book_0.jpg',
-          '/src/assets/images/default_book_1.jpg',
-          '/src/assets/images/default_book_2.jpg',
-        ],
-        reviews: []
-      },
       search: '',
       headers: [
         {title: '', value: 'createdBy.name', key: 'createdBy.name'},
@@ -138,28 +127,23 @@ export default {
       ],
     }
   },
+  setup() {
+    const bookStore = useBookStore();
+    const route = useRoute();
+
+    const getBook = async () => {
+      await bookStore.show(route.params.id);
+    };
+
+    onMounted(getBook)
+  },
   mounted() {
     this.headers[0].title = i18n.global.t('user');
     this.headers[1].title = i18n.global.t('comment');
     this.headers[2].title = i18n.global.t('rating');
-
-    this.book.description = 'A arrebatadora história dos Targaryen ganha vida neste livro de George R.R. Martin, autor de As Crônicas de Gelo e Fogo, que deu origem à adaptação de sucesso da HBO, "A Casa do Dragão".\n' +
-      'Séculos antes dos eventos de A guerra dos tronos, a Casa Targaryen – única família de senhores dos dragões a sobreviver à Destruição de Valíria – tomou residência em Pedra do Dragão. A história de Fogo & Sangue começa com o lendário Aegon, o Conquistador, criador do Trono de Ferro, e segue narrando as gerações de Targaryen que lutaram para manter o assento, até a guerra civil que quase destruiu sua dinastia.\n' +
-      'O que realmente aconteceu durante a Dança dos Dragões? Por que era tão perigoso visitar Valíria depois da Destruição? Quais foram os piores crimes de Maegor, o Cruel? Essas são algumas das questões respondidas neste livro essencial, relatadas por um sábio meistre da Cidadela.\n' +
-      'Ricamente ilustrado com mais de oitenta imagens assinadas pelo artista Doug Wheatley, Fogo & Sangue dará aos leitores uma nova e completa visão da fascinante história de Westeros – um livro imperdível para os fãs do autor.';
-
-    for (let i = 0; i < 100; i++) {
-      this.book.reviews.push({
-        rating: 4,
-        comment: 'Sed ipsam similique quos quo qui non illo ut. Voluptatum ipsam at aut deserunt maxime. Soluta aliquid qui rerum est. Sed ipsam et ratione non.',
-        createdBy: {
-          id: 623,
-          name: 'Lacey Wiza'
-        }
-      })
-    }
   },
   computed: {
+    ...mapState(useBookStore, ['book']),
     isMobile() {
       return this.$vuetify.display.mobile;
     },
@@ -169,13 +153,14 @@ export default {
       this.sheet = !this.sheet;
     },
     formatDate(date_string: string) {
+      if (!date_string) return '';
+
       const date = new Date(date_string);
       return format(date, 'dd/MM/yyyy');
     },
     getCategoryTranslated(category) {
-      return i18n.global.t(`${category.toLowerCase()}`);
+      return i18n.global.t(`${category?.toLowerCase()}`);
     },
   }
 }
 </script>
-
