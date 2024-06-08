@@ -1,5 +1,8 @@
 import {defineStore} from 'pinia';
 import {IUser} from "../interfaces/user";
+import API from "../api";
+import {toast} from "vue3-toastify";
+import {i18n} from "../plugins/i18n";
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -18,6 +21,17 @@ export const useAppStore = defineStore('app', {
         email: '',
         is_admin: false,
       }
+    },
+    updateUser(new_user: IUser) {
+      API.put(`/users/${this.user.id}`, new_user)
+        .then((res) => {
+          this.$state.user = res.data.user;
+          toast.success(i18n.global.t('success editing user'));
+        })
+        .catch((err) => {
+          console.log(err)
+          toast.success(i18n.global.t('error editing user'));
+        });
     }
   },
   persist: {

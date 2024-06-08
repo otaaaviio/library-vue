@@ -5,7 +5,6 @@
     outlined
     dense
     color="blue"
-    autocomplete="false"
     :type="showPassword ? 'text' : 'password'"
     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
     :rules="[
@@ -34,6 +33,6 @@ export default {
       type: Boolean,
       default: true
     }
-  }
+  },
 }
 </script>
