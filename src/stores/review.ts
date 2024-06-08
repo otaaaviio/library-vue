@@ -50,11 +50,10 @@ export const useReviewStore = defineStore({
         });
     },
     update(review: IReview) {
-      const body = {
+      API.put(`/reviews/${review.id}`, {
         rating: review.rating,
         comment: review.comment,
-      }
-      API.put(`/reviews/${review.id}`, review)
+      })
         .then(() => {
           toast.success(i18n.global.t('review updated'));
         })

@@ -57,11 +57,6 @@ import {useBookStore, usePaginationStore} from "../../stores";
 import debounce from 'lodash/debounce';
 
 export default {
-  data() {
-    return {
-      categories: [],
-    }
-  },
   setup() {
     const pubStore = usePublisherStore();
     const authorStore = useAuthorStore();

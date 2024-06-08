@@ -21,6 +21,28 @@
       <v-card-title>
         {{ $t('edit review of book') + selectedReview?.book.title }}
       </v-card-title>
+      <v-container class="pa-5">
+        <h5 class="ml-1" style="color: gray;">
+          {{$t('rating')}}
+        </h5>
+        <v-rating
+          :label="$t('rating')"
+          v-model="selectedReview.rating"
+          active-color="amber-darken-1"
+          color="amber-darken-1"
+          density="compact"
+          class="mb-5"
+        />
+        <v-textarea
+          :label="$t('comment')"
+          variant="outlined"
+          outlined
+          v-model="selectedReview.comment"
+          dense
+          color="blue"
+          :rules="[() => !!selectedReview.comment || $t('comment required')]"
+        />
+      </v-container>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
@@ -133,15 +155,17 @@ export default {
   },
   methods: {
     openDialog(review, dialog) {
-      this.selectedReview = review;
+      this.selectedReview = { ...review };
       if (dialog === 'edit')
         this.openEditDialog = true;
       else
         this.openDelDialog = true;
     },
     async updateReview(review: IReview) {
+      this.openEditDialog = false;
       const reviewStore = useReviewStore();
       await reviewStore.update(review);
+      this.selectedReview = null;
     },
     async deleteReview(id: number) {
       const reviewStore = useReviewStore();

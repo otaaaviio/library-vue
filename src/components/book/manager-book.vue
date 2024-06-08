@@ -202,7 +202,7 @@ export default {
   created() {
     this.categories = CategoryEnumHelper.getList();
 
-    if(!!this.bookEdit) {
+    if(!this.bookEdit) {
       console.log('aqqq')
     }
   },

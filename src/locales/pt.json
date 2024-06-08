@@ -94,6 +94,8 @@
   "review deleted": "Review deletado com sucesso!",
   "delete review of book": "Deletar review do livro ",
   "edit review of book": "Editar review do livro ",
+  "comment required": "Comentário é obrigatório",
+  "review updated": "Review atualizado com sucesso!",
   "rating": "Avaliação",
   "create book success": "Livro criado com sucesso!",
   "error creating book": "Erro ao criar livro! Tente novamente mais tarde.",
