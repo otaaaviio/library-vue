@@ -19,7 +19,7 @@
       <v-col class="pl-7 pr-7">
         <v-row class="d-flex align-center justify-md-space-between">
           <h1>{{ book.title }}</h1>
-          <div>
+          <div :hidden="disableManagerBtn">
             <v-btn @click="handleSheet">{{ $t('edit') }}</v-btn>
             <v-btn class="ml-10" color="red">{{ $t('delete') }}</v-btn>
           </div>
@@ -32,16 +32,20 @@
           </template>
         </v-row>
         <v-row class="d-flex align-center">
-          ({{ book.avgRating }})
+          <h4 class="mr-1">
+            ({{ book.review_count }})
+          </h4>
           <v-rating
-            v-model="book.avgRating"
+            v-model="book.avg_rating"
             readonly
+            class="mr-5"
             active-color="amber-darken-1"
             color="amber-darken-1"
-            size="26"
+            size="30"
           />
           <v-btn
             density="compact"
+            :disabled="disableNotLogged"
           >{{ $t('review') }}
           </v-btn>
         </v-row>
@@ -59,9 +63,9 @@
         <v-row class="mb-5 mt-5">
           <v-divider class="border-opacity-25"></v-divider>
         </v-row>
-        <v-row class="d-flex justify-end">
+        <v-row class="d-flex justify-end flex-column">
           <h5 class="font-weight-regular elevation-3 rounded-lg pa-3">{{ book.description }}</h5>
-          <v-btn class="mt-10">
+          <v-btn class="mt-10" width="300" :disabled="disableNotLogged">
             <v-icon class="mr-2">mdi-book-plus</v-icon>
             {{ $t('addToReadList') }}
           </v-btn>
@@ -112,8 +116,9 @@ import {i18n} from "../../plugins/i18n";
 import {format} from 'date-fns';
 import {useBookStore} from "../../stores";
 import {onMounted} from "vue";
-import { useRoute } from 'vue-router';
+import {useRoute} from 'vue-router';
 import {mapState} from "pinia";
+import {useAppStore} from "../../stores";
 
 export default {
   data() {
@@ -121,7 +126,7 @@ export default {
       sheet: false,
       search: '',
       headers: [
-        {title: '', value: 'createdBy.name', key: 'createdBy.name'},
+        {title: '', value: 'CreatedBy.name', key: 'createdBy.name'},
         {title: '', value: 'comment', key: 'comment'},
         {title: '', value: 'rating', key: 'rating'},
       ],
@@ -147,6 +152,14 @@ export default {
     isMobile() {
       return this.$vuetify.display.mobile;
     },
+    disableManagerBtn() {
+      const appStore = useAppStore();
+      return this.book.createdBy?.id !== appStore.user.id;
+    },
+    disableNotLogged() {
+      const appStore = useAppStore();
+      return appStore.user.id === -1;
+    }
   },
   methods: {
     handleSheet() {

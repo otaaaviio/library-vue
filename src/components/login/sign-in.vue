@@ -29,10 +29,6 @@
             <v-progress-linear class="mb-3 mt-3" height="1"></v-progress-linear>
             <v-btn type="submit" dark block tile>{{ $t('login') }}</v-btn>
           </v-form>
-          <h5
-            class="text-center  grey--text mt-4 mb-3"
-          >{{ $t('orLoginUsing') }}</h5>
-          <google-btn/>
         </v-col>
       </v-row>
     </v-card-text>

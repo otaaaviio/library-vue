@@ -51,6 +51,7 @@
               :label="$t('category')"
               color="blue"
               variant="outlined"
+              :no-data-text="$t('no data')"
               :items="categories"
               v-model="book.category_id"
               :rules="[v => !!v || $t('category is required')]"
@@ -112,7 +113,7 @@
 <script lang="ts">
 import {CategoryEnumHelper} from "../../enums/category";
 import {usePublisherStore} from "../../stores/publisher";
-import {onMounted, watch} from "vue";
+import {watch} from "vue";
 import {mapState} from "pinia";
 import debounce from 'lodash/debounce';
 import {useAuthorStore} from "../../stores/author";
@@ -184,11 +185,6 @@ export default {
       await authorStore.create(new_author);
     }
 
-    onMounted(() => {
-      fetchPublishers();
-      fetchAuthors();
-    });
-
     watch(publisher_name, fetchPublishers);
     watch(author_name, fetchAuthors);
 
@@ -198,6 +194,8 @@ export default {
       publisherDialog,
       authorDialog,
       createPublisher,
+      fetchPublishers,
+      fetchAuthors,
       createAuthor
     }
   },
@@ -247,6 +245,10 @@ export default {
     active(value) {
       if (!value)
         this.resetForm();
+      if(value) {
+        this.fetchAuthors();
+        this.fetchPublishers();
+      }
       this.publisher_name = '';
       this.author_name = '';
     },

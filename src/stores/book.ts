@@ -4,25 +4,40 @@ import {usePaginationStore} from "./pagination";
 import {IBook, IBookCreate, IBookDetailed} from "../interfaces/book";
 import {toast} from "vue3-toastify";
 import {i18n} from "../plugins/i18n";
+import {IFilter} from "../interfaces/filter";
 
 export const useBookStore = defineStore({
   id: 'book',
   state: () => ({
     books: [] as IBook[],
     book: {} as IBookDetailed,
+    loadingBooks: false,
   }),
   getters: {
     getBooks: (state) => state.books,
   },
   actions: {
-    index(page) {
+    index(page?: number, filters: IFilter[] = []) {
       const pagStore = usePaginationStore();
-      API.get(`/books`, {
-        params: {
-          page: page,
-          items_per_page: 12,
+      this.$state.loadingBooks = true;
+
+      if (!page) {
+        page = pagStore.$state.currentPage;
+      }
+
+      let params = {
+        page: page,
+        items_per_page: 12,
+      }
+
+      if (Object.keys(filters).length > 0) {
+        params = {
+          ...params,
+          filters
         }
-      })
+      }
+
+      API.get(`/books`, {params})
         .then((res) => {
           this.$state.books = res.data.data;
           pagStore.$state.totalPages = res.data.pagination.total_pages;
@@ -30,7 +45,9 @@ export const useBookStore = defineStore({
         })
         .catch(() => {
           toast.error(i18n.global.t('an error occurred'));
-        });
+        }).finally(() => {
+        this.$state.loadingBooks = false;
+      });
     },
     show(id: number) {
       return new Promise((resolve, reject) => {

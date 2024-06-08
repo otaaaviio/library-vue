@@ -10,6 +10,7 @@ declare module 'vue' {
     AppFooter: typeof import('./components/layout/app-footer.vue')['default']
     BookCard: typeof import('./components/book/book-card.vue')['default']
     ButtonMenu: typeof import('./components/layout/button-menu.vue')['default']
+    Filters: typeof import('./components/book/filters.vue')['default']
     FormSubmit: typeof import('./components/book/form-submit.vue')['default']
     GoogleBtn: typeof import('./components/login/google-btn.vue')['default']
     InputPassword: typeof import('./components/utils/input-password.vue')['default']

@@ -46,10 +46,6 @@
             />
           </v-row>
           <v-btn type="submit" dark block tile>{{ $t('createAccount') }}</v-btn>
-          <h5
-            class="text-center  grey--text mt-4 mb-3"
-          >{{ $t('orSignUpUsing') }}</h5>
-          <google-btn/>
         </v-col>
       </v-form>
     </v-card-text>
