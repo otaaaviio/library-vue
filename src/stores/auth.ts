@@ -5,6 +5,7 @@ import {useAppStore} from "./app";
 import router from "../router";
 import {defineStore} from "pinia";
 import {ILogin, IRegister} from "../interfaces/auth";
+import {useReviewStore} from "./review";
 
 export const useAuthStore = defineStore({
   id: 'auth',
@@ -34,9 +35,11 @@ export const useAuthStore = defineStore({
         });
     },
     logout() {
+      const reviewStore = useReviewStore();
       API.get('/sessions/logout',)
         .then(() => {
           this.redirectLogout();
+          reviewStore.$state.reviews = [];
         })
         .catch((err) => {
           if (err.response?.status === 401)
