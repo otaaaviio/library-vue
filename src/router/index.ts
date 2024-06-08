@@ -6,6 +6,7 @@ import ListToRead from '../pages/list-to-read.vue'
 import Login from '../pages/login.vue'
 import MyReviews from '../pages/my-reviews.vue'
 import NotFound from '../pages/not-found.vue'
+import Unauthorized from '../pages/unauthorized.vue'
 
 const routes = [
   {
@@ -18,31 +19,31 @@ const routes = [
     path: '/books',
     name: 'ListBook',
     component: ListBook,
-    meta: { layout: 'DefaultLayout'}
   },
   {
     path: '/books/:id',
     name: 'ViewBook',
     component: ViewBook,
-    meta: { layout: 'DefaultLayout'}
   },
   {
     path: '/to-read',
     name: 'ListToRead',
     component: ListToRead,
-    meta: { layout: 'DefaultLayout'}
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
-    meta: { layout: 'DefaultLayout'}
   },
   {
     path: '/my-reviews',
     name: 'MyReviews',
     component: MyReviews,
-    meta: { layout: 'DefaultLayout'}
+  },
+  {
+    path: '/unauthorized',
+    name: 'Unauthorized',
+    component: Unauthorized,
   },
   {
     path: '/:pathMatch(.*)*',
@@ -63,9 +64,14 @@ router.beforeEach((to, from, next) => {
   if (to.fullPath === '/')
     next('/books')
 
-  if (user_id)
+  if (user_id) {
     if (to.fullPath === '/login' && user_id !== -1)
       next('/books')
+
+    if((to.fullPath === '/my-reviews' || to.fullPath === '/to-read' || to.fullPath === '/account') && user_id === -1) {
+      next('/unauthorized')
+    }
+  }
 
   next()
 })

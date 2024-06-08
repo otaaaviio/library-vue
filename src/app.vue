@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <default-layout v-if="$route.name !== 'NotFound'">
+      <default-layout v-if="$route.name !== 'NotFound' && $route.name !== 'Unauthorized'">
         <router-view />
       </default-layout>
       <router-view v-else />

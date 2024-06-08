@@ -99,6 +99,8 @@
     "error editing user": "Erro ao editar usuário! Tente novamente mais tarde.",
     "success editing user": "Usuário editado com sucesso!",
   "no changes": "Nenhuma alteração foi feita",
+  "do login to can access": "Faça login para acessar esta página",
+  "unauthorized": "Você não tem autorização para acessar esta página",
   "error fetching book": "Erro ao buscar livro! Tente novamente mais tarde.",
     "delete book success": "Livro deletado com sucesso!",
     "error deleting book": "Erro ao deletar livro! Tente novamente mais tarde.",

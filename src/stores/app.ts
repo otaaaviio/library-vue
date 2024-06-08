@@ -25,7 +25,7 @@ export const useAppStore = defineStore('app', {
     updateUser(new_user: IUser) {
       API.put(`/users/${this.user.id}`, new_user)
         .then((res) => {
-          this.$state.user = res.data.user;
+          this.setUser(res.data.user)
           toast.success(i18n.global.t('success editing user'));
         })
         .catch((err) => {

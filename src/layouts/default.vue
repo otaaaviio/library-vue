@@ -41,7 +41,7 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" temporary>
       <v-list>
-        <v-list-item v-for="item in drawerList" :key="item.title" link :to="item.to">
+        <v-list-item v-for="item in drawerList" :key="item.title" link :to="item.to" :disabled="item.disabled">
           <v-row align="center">
             <v-col cols="auto">
               <v-icon>{{ item.icon }}</v-icon>
@@ -110,12 +110,15 @@ export default {
     },
     drawerList() {
       return [
-        {title: this.$t('books'), icon: 'mdi-book', to: '/books'},
-        {title: this.$t('myReviews'), icon: 'mdi-comment-quote', to: '/my-reviews'},
-        {title: this.$t('listToRead'), icon: 'mdi-format-list-bulleted', to: '/to-read'},
-        {title: this.$t('account'), icon: 'mdi-account', to: '/account'},
+        {title: this.$t('books'), icon: 'mdi-book', to: '/books', disabled: false},
+        {title: this.$t('myReviews'), icon: 'mdi-comment-quote', to: '/my-reviews', disabled: this.getUserLoggedIn},
+        {title: this.$t('listToRead'), icon: 'mdi-format-list-bulleted', to: '/to-read', disabled: this.getUserLoggedIn},
+        {title: this.$t('account'), icon: 'mdi-account', to: '/account', disabled: this.getUserLoggedIn},
       ];
     },
+    getUserLoggedIn() {
+      return this.appStore.user?.id === -1;
+    }
   },
   methods: {
     setTheme(theme: string) {

@@ -28,10 +28,9 @@ export const useAuthStore = defineStore({
           });
         })
         .catch((err) => {
-          if (err.response?.status === 404) toast.error($t('userNotFound'))
-          else if (err.response?.status === 401) toast.error($t('invalidPassword'))
+          if (err.response?.status === 404) toast.error(i18n.global.t('userNotFound'))
+          else if (err.response?.status === 401) toast.error(i18n.global.t('invalidPassword'))
           else toast.error(i18n.global.t('loginError'));
-          console.log(err)
         });
     },
     logout() {
