@@ -21,7 +21,6 @@
       <v-autocomplete
         clearable
         :label="$t('author')"
-        @update:search="author_name = $event"
         class="me-3"
         :no-data-text="$t('no data')"
         color="blue"
@@ -32,7 +31,6 @@
       <v-autocomplete
         clearable
         :label="$t('publisher')"
-        @update:search="publisher_name = $event"
         :no-data-text="$t('no data')"
         color="blue"
         variant="outlined"
@@ -62,21 +60,18 @@ export default {
     const authorStore = useAuthorStore();
     const bookStore = useBookStore();
 
-    const author_name = ref('');
-    const publisher_name = ref('');
-
     const book_name = ref('');
     const author_id = ref(null);
     const publisher_id = ref(null);
     const category_id = ref(null);
 
-    const fetchPublishers = debounce(async () => {
-      await pubStore.index(publisher_name.value);
-    }, 300);
+    const fetchPublishers = async () => {
+      await pubStore.index();
+    };
 
-    const fetchAuthors = debounce(async () => {
-      await authorStore.index(author_name.value);
-    }, 300);
+    const fetchAuthors = async () => {
+      await authorStore.index();
+    };
 
     const fetchBooks = debounce(async (filters) => {
       await bookStore.index(1, filters);
@@ -87,12 +82,7 @@ export default {
       fetchAuthors();
     });
 
-    watch(publisher_name, fetchPublishers);
-    watch(author_name, fetchAuthors);
-
     return {
-      author_name,
-      publisher_name,
       book_name,
       author_id,
       publisher_id,

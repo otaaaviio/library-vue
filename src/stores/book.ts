@@ -5,6 +5,7 @@ import {IBook, IBookCreate, IBookDetailed} from "../interfaces/book";
 import {toast} from "vue3-toastify";
 import {i18n} from "../plugins/i18n";
 import {IFilter} from "../interfaces/filter";
+import {formatImages} from "./utils";
 
 export const useBookStore = defineStore({
   id: 'book',
@@ -15,6 +16,7 @@ export const useBookStore = defineStore({
   }),
   getters: {
     getBooks: (state) => state.books,
+    getBook: (state) => state.book,
   },
   actions: {
     index(page?: number, filters: IFilter[] = []) {
@@ -60,9 +62,12 @@ export const useBookStore = defineStore({
           });
       })
     },
-    create(book: IBookCreate) {
+    async create(book: IBookCreate) {
+      book.images = await formatImages(book.images);
+      const published_at_iso = book.published_at.toISOString();
+
       return new Promise(async (resolve, reject) => {
-        API.post(`/books`, book)
+        API.post(`/books`, {...book, published_at: published_at_iso})
           .then((res) => {
             toast.success(i18n.global.t('create book success'));
             resolve(res);
@@ -71,11 +76,25 @@ export const useBookStore = defineStore({
             toast.error(i18n.global.t('error creating book'));
             reject(err);
           });
-      })
-        .catch((err) => {
-          toast.error(i18n.global.t('error processing images'));
-          reject(err);
-        });
+      });
+    },
+    async update(book: any, id: number) {
+      if(!!book.images)
+        book.images = await formatImages(book.images);
+      const published_at_iso = book.published_at.toISOString();
+
+      return new Promise(async (resolve, reject) => {
+        API.put(`/books/${id}`, {...book, published_at: published_at_iso})
+          .then((res) => {
+            toast.success(i18n.global.t('update success'));
+            this.$state.book = res.data.book;
+            resolve(res);
+          })
+          .catch((err) => {
+            toast.error(i18n.global.t('error editing book'));
+            reject(err);
+          });
+      });
     }
   },
 })

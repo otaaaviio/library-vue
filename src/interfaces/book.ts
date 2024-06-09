@@ -22,15 +22,24 @@ export interface IBookDetailed {
   id: number,
   title: string,
   description: string,
-  author: string,
-  publisher: string,
-  category: string,
-  avgRating: number,
-  createdBy: {
+  Author: {
     id: number,
     name: string,
   },
+  Publisher: {
+    id: number,
+    name: string,
+  },
+  Category: {
+    id: number,
+    name: string,
+  },
+  CreatedBy: {
+    id: number,
+    name: string,
+  },
+  avgRating: number,
   published_at: string,
-  images: string[],
-  reviews: [],
+  Images: string[],
+  Reviews: [],
 }

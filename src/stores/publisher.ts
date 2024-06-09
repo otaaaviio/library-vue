@@ -15,18 +15,10 @@ export const usePublisherStore = defineStore({
     },
   },
   actions: {
-    index(name?: string) {
-      const params = {
-        page: 1,
-        items_per_page: 50,
-      };
-      if (name) {
-        params['filters'] = [{field: 'name', value: name}];
-      }
-
-      API.get(`/publishers`, {params})
+    index() {
+      API.get(`/publishers`)
         .then((res) => {
-          this.publishers = res.data.data.map((p) => ({value: p.id, title: p.name}));
+          this.publishers = res.data.map((p) => ({value: p.id, title: p.name}));
         })
         .catch(() => {
           toast.error(i18n.global.t('an error occurred'));
@@ -34,10 +26,10 @@ export const usePublisherStore = defineStore({
     },
     create(name: string) {
       API.post(`/publishers`, {name})
-        .then((res) => {
+        .then(() => {
           toast.success(i18n.global.t('create publisher success'));
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error(i18n.global.t('error creating publisher'));
         });
     }

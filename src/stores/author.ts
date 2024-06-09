@@ -10,18 +10,10 @@ export const useAuthorStore = defineStore({
     authors: [] as IAuthor[],
   }),
   actions: {
-    index(name?: string) {
-      const params = {
-        page: 1,
-        items_per_page: 50,
-      };
-      if (name) {
-        params['filters'] = [{field: 'name', value: name}];
-      }
-
-      API.get(`/authors`, {params})
+    index() {
+      API.get(`/authors`)
         .then((res) => {
-          this.authors = res.data.data.map((a) => ({value: a.id, title: a.name}));
+          this.authors = res.data.map((a) => ({value: a.id, title: a.name}));
         })
         .catch(() => {
           toast.error(i18n.global.t('an error occurred'));
@@ -29,10 +21,10 @@ export const useAuthorStore = defineStore({
     },
     create(name: string) {
       API.post(`/authors`, {name})
-        .then((res) => {
+        .then(() => {
           toast.success(i18n.global.t('create author success'));
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error(i18n.global.t('error creating author'));
         });
     }

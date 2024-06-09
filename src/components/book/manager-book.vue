@@ -12,10 +12,7 @@
     @formSubmitted="authorDialog = false"
   />
   <v-bottom-sheet :model-value="active" width="900" @click:outside="handleSheet" fullscreen>
-    <v-card
-      class="text-center"
-      height="100%"
-    >
+    <v-card class="text-center" height="100%">
       <v-card-title class="mt-5 mb-15">{{ $t('registerNewBook') }}</v-card-title>
       <v-form ref="form" class="desktop-padding" @submit.prevent="onSubmit">
         <v-text-field
@@ -59,7 +56,6 @@
             <v-autocomplete
               clearable
               :label="$t('author')"
-              @update:search="author_name = $event"
               :no-data-text="$t('no data')"
               color="blue"
               variant="outlined"
@@ -72,7 +68,6 @@
             <v-autocomplete
               clearable
               :label="$t('publisher')"
-              @update:search="publisher_name = $event"
               :no-data-text="$t('no data')"
               color="blue"
               variant="outlined"
@@ -82,26 +77,14 @@
               v-model="book.publisher_id"
               :rules="[v => !!v || $t('publisher is required')]"
             />
-            <v-file-input
-              :label="$t('file input')"
-              variant="outlined"
-              multiple
-              v-model="book.images"
-            />
+            <v-file-input :label="$t('file input')" variant="outlined" multiple v-model="book.images"/>
           </v-col>
         </v-row>
         <v-row class="d-flex justify-end align-baseline mb-7 mr-7">
-          <v-btn
-            variant="text"
-            @click="handleSheet"
-          >
+          <v-btn variant="text" @click="handleSheet">
             {{ $t('cancel') }}
           </v-btn>
-          <v-btn
-            variant="text"
-            type="submit"
-            class="ml-10"
-          >
+          <v-btn variant="text" type="submit" class="ml-10">
             {{ $t('save') }}
           </v-btn>
         </v-row>
@@ -113,9 +96,8 @@
 <script lang="ts">
 import {CategoryEnumHelper} from "../../enums/category";
 import {usePublisherStore} from "../../stores/publisher";
-import {watch} from "vue";
+import {onMounted, watch} from "vue";
 import {mapState} from "pinia";
-import debounce from 'lodash/debounce';
 import {useAuthorStore} from "../../stores/author";
 import {useBookStore} from "../../stores";
 import {toast} from "vue3-toastify";
@@ -136,10 +118,6 @@ export default {
       default: () => {
       },
     },
-    bookEdit: {
-      type: Object,
-      default: {},
-    },
   },
   data() {
     return {
@@ -159,74 +137,72 @@ export default {
   computed: {
     ...mapState(usePublisherStore, ['publishers']),
     ...mapState(useAuthorStore, ['authors']),
+    ...mapState(useBookStore, {bookFromStore: 'book'}),
   },
   setup() {
     const pubStore = usePublisherStore();
     const authorStore = useAuthorStore();
 
-    const author_name = ref('');
     const authorDialog = ref(false);
-    const publisher_name = ref('');
     const publisherDialog = ref(false);
 
-    const fetchPublishers = debounce(async () => {
-      await pubStore.index(publisher_name.value);
-    }, 300);
+    const fetchPublishers = async () => {
+      await pubStore.index();
+    };
 
-    const fetchAuthors = debounce(async () => {
-      await authorStore.index(author_name.value);
-    }, 300);
+    const fetchAuthors = async () => {
+      await authorStore.index();
+    };
 
     const createPublisher = async (new_publisher) => {
       await pubStore.create(new_publisher);
+      await fetchPublishers();
     }
 
     const createAuthor = async (new_author) => {
       await authorStore.create(new_author);
+      await fetchAuthors();
     }
 
-    watch(publisher_name, fetchPublishers);
-    watch(author_name, fetchAuthors);
+    onMounted(() => {
+      fetchPublishers();
+      fetchAuthors();
+    });
 
     return {
-      publisher_name,
-      author_name,
       publisherDialog,
       authorDialog,
       createPublisher,
-      fetchPublishers,
-      fetchAuthors,
       createAuthor
     }
   },
   created() {
     this.categories = CategoryEnumHelper.getList();
-
-    if(!this.bookEdit) {
-      console.log('aqqq')
-    }
   },
   methods: {
     async onSubmit() {
       const bookStore = useBookStore();
       const validator = await this.$refs.form.validate();
-
-      if (validator.valid)
+      if (!validator.valid)
         return
 
       if (!this.book.published_at) {
         toast.error(i18n.global.t('published at is required'));
         return
-      } else if (!this.book.images.length > 0) {
+      } else if (!this.book.images?.length > 0 && !this.editing) {
         toast.error(i18n.global.t('file input is required'));
         return
       }
 
-      if (this.book_id)
-        console.log('att aq')
+      if (this.editing)
+        await bookStore.update(this.book, this.book_id).finally(() => {
+          this.handleSheet();
+        })
       else
-        await bookStore.create(this.book).then(() => {
-          this.active = false;
+        await bookStore.create(this.book).then(async () => {
+          await bookStore.index()
+        }).finally(() => {
+          this.handleSheet();
         });
     },
     resetForm() {
@@ -243,15 +219,26 @@ export default {
   },
   watch: {
     active(value) {
-      if (!value)
+      if (!value && !this.editing)
         this.resetForm();
-      if(value) {
-        this.fetchAuthors();
-        this.fetchPublishers();
-      }
-      this.publisher_name = '';
-      this.author_name = '';
     },
+    'bookFromStore': {
+      immediate: true,
+      handler(newVal) {
+        if (this.editing && Object.keys(newVal).length > 0) {
+          this.book_id = newVal.id;
+          this.book = {
+            title: newVal.title,
+            publisher_id: newVal.Publisher?.id,
+            author_id: newVal.Author?.id,
+            category_id: newVal.Category?.id,
+            description: newVal.description,
+            published_at: null,
+            images: null,
+          }
+        }
+      }
+    }
   },
 }
 </script>
