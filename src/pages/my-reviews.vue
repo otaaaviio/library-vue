@@ -23,7 +23,7 @@
       </v-card-title>
       <v-container class="pa-5">
         <h5 class="ml-1" style="color: gray;">
-          {{$t('rating')}}
+          {{ $t('rating') }}
         </h5>
         <v-rating
           v-if="selectedReview"
@@ -81,12 +81,7 @@
           <a :href="`/books/${item.book.id}`" style="text-decoration:none;">{{ item.book.title }}</a>
         </template>
         <template v-slot:item.comment="{ item }">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <h4 v-bind="attrs" v-on="on" class="text-truncate" style="max-width: 300px;">{{ item.comment }}</h4>
-            </template>
-            <span>{{ item.comment }}</span>
-          </v-tooltip>
+          <h4 class="text-truncate" style="max-width: 300px;">{{ item.comment }}</h4>
         </template>
         <template v-slot:item.rating="{ item }">
           <v-rating
@@ -160,7 +155,7 @@ export default {
   methods: {
     openDialog(review, dialog) {
       console.log(review)
-      this.selectedReview = { ...review };
+      this.selectedReview = {...review};
       if (dialog === 'edit')
         this.openEditDialog = true;
       else
