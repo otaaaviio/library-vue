@@ -4,7 +4,7 @@ import {usePaginationStore} from "./pagination";
 import {toast} from "vue3-toastify";
 import {i18n} from "../plugins/i18n";
 import {IFilter} from "../interfaces/filter";
-import {IReview} from "../interfaces/review";
+import {ICreateReview, IReview} from "../interfaces/review";
 
 export const useReviewStore = defineStore({
   id: 'review',
@@ -12,6 +12,15 @@ export const useReviewStore = defineStore({
     reviews: [] as IReview[],
   }),
   actions: {
+    create(review: ICreateReview) {
+      API.post('/reviews', review)
+        .then(() => {
+          toast.success(i18n.global.t('create review success'));
+        })
+        .catch(() => {
+          toast.error(i18n.global.t('an error occurred'));
+        })
+    },
     index(page: number, filters: IFilter[] = []) {
       const pagStore = usePaginationStore();
 
@@ -30,6 +39,7 @@ export const useReviewStore = defineStore({
       API.get(`/reviews`, {params})
         .then((res) => {
           const reviews = res.data.data;
+          this.$state.reviews = [];
           reviews.forEach((review) => {
             this.$state.reviews.push({
               id: review.id,

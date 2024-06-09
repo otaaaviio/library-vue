@@ -8,3 +8,9 @@ export interface IReview {
   user_id: number,
   id: number,
 }
+
+export interface ICreateReview {
+  book_id: number,
+  rating: number,
+  comment: string,
+}

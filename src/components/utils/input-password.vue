@@ -2,8 +2,6 @@
   <v-text-field
     :label="label"
     variant="outlined"
-    outlined
-    dense
     color="blue"
     :type="showPassword ? 'text' : 'password'"
     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"

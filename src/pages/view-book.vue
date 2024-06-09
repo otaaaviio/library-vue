@@ -1,4 +1,7 @@
 <template>
+  <v-dialog v-model="dialogOpen" max-width="500">
+    <form-review :handle-confirm="handleReview"/>
+  </v-dialog>
   <v-container>
     <manager-book :active="sheet" :handleSheet="handleSheet"/>
     <v-row class="d-flex justify-center align-start mt-5">
@@ -45,7 +48,8 @@
           />
           <v-btn
             density="compact"
-            :disabled="disableNotLogged"
+            :disabled="disableNotLogged || alreadyReviewedByUser"
+            @click="handleDialog"
           >{{ $t('review') }}
           </v-btn>
         </v-row>
@@ -116,17 +120,19 @@
 import {i18n} from "../plugins/i18n";
 import {format} from 'date-fns';
 import {useBookStore} from "../stores";
-import { onMounted} from "vue";
+import {onMounted} from "vue";
 import {useRoute} from 'vue-router';
 import {mapState} from "pinia";
 import {useAppStore} from "../stores";
 import {useReadingListStore} from "../stores/reading-list";
+import {useReviewStore} from "../stores/review";
 
 export default {
   data() {
     return {
       sheet: false,
       search: '',
+      dialogOpen: false,
       headers: [
         {title: '', value: 'CreatedBy.name', key: 'createdBy.name'},
         {title: '', value: 'comment', key: 'comment'},
@@ -143,7 +149,6 @@ export default {
       await readStore.index();
     }
 
-
     const getBook = async () => {
       await bookStore.show(route.params.id);
     };
@@ -154,6 +159,10 @@ export default {
         getReadingList(),
       ]);
     });
+
+    return {
+      getBook,
+    }
   },
   mounted() {
     this.headers[0].title = i18n.global.t('user');
@@ -163,11 +172,18 @@ export default {
   computed: {
     ...mapState(useBookStore, ['book']),
     ...mapState(useReadingListStore, ['readingList']),
+    ...mapState(useAppStore, ['user']),
     isMobile() {
       return this.$vuetify.display.mobile;
     },
     alreadyExistInReadingList() {
       return this.readingList.some((item) => item.Book.id === this.book.id);
+    },
+    alreadyReviewedByUser() {
+      if (!this.book.reviews)
+        return false;
+
+      return this.book.reviews.some((item) => item.CreatedBy.id === this.user.id);
     },
     disableManagerBtn() {
       const appStore = useAppStore();
@@ -196,6 +212,19 @@ export default {
     getCategoryTranslated(category) {
       return i18n.global.t(`${category?.toLowerCase()}`);
     },
+    handleDialog() {
+      this.dialogOpen = !this.dialogOpen;
+    },
+    async handleReview(data) {
+      const reviewStore = useReviewStore();
+      const review = {
+        book_id: this.book.id,
+        ...data
+      }
+      this.handleDialog();
+      await reviewStore.create(review)
+      await this.getBook()
+    }
   }
 }
 </script>

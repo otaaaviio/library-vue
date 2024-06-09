@@ -26,7 +26,7 @@
           {{$t('rating')}}
         </h5>
         <v-rating
-          :label="$t('rating')"
+          v-if="selectedReview"
           v-model="selectedReview.rating"
           active-color="amber-darken-1"
           color="amber-darken-1"
@@ -34,6 +34,7 @@
           class="mb-5"
         />
         <v-textarea
+          v-if="selectedReview"
           :label="$t('comment')"
           variant="outlined"
           outlined
@@ -141,6 +142,9 @@ export default {
     }
 
     onMounted(fetchReviews)
+    return {
+      fetchReviews,
+    }
   },
   computed: {
     ...mapState(useReviewStore, ['reviews']),
@@ -155,6 +159,7 @@ export default {
   },
   methods: {
     openDialog(review, dialog) {
+      console.log(review)
       this.selectedReview = { ...review };
       if (dialog === 'edit')
         this.openEditDialog = true;
@@ -165,6 +170,7 @@ export default {
       this.openEditDialog = false;
       const reviewStore = useReviewStore();
       await reviewStore.update(review);
+      await this.fetchReviews();
       this.selectedReview = null;
     },
     async deleteReview(id: number) {
