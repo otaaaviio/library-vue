@@ -53,8 +53,8 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
-      <router-view/>
+    <v-main :class="currentTheme === 'light' ? 'bg-grey-lighten-2' : ''">
+      <router-view />
       <wave-component/>
       <app-footer/>
     </v-main>
