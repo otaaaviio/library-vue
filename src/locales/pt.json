@@ -120,6 +120,7 @@
     "error creating review": "Erro ao criar review! Tente novamente mais tarde.",
   "create author success": "Autor criado com sucesso!",
     "error creating author": "Erro ao criar autor! Tente novamente mais tarde.",
+  "update success": "Atualizado com sucesso!",
   "an error occurred": "Ocorreu um erro!",
   "create new publisher": "Registrar nova editora",
   "create new author": "Registrar novo autor",

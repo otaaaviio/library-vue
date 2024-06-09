@@ -65,7 +65,8 @@
         </v-row>
         <v-row class="d-flex justify-end flex-column">
           <h5 class="font-weight-regular elevation-3 rounded-lg pa-3">{{ book.description }}</h5>
-          <v-btn class="mt-10" width="300" :disabled="disableNotLogged">
+          <v-btn class="mt-10" width="300" :disabled="disableNotLogged || alreadyExistInReadingList"
+                 @click="addBookToReadingList(book.id)">
             <v-icon class="mr-2">mdi-book-plus</v-icon>
             {{ $t('addToReadList') }}
           </v-btn>
@@ -112,13 +113,14 @@
 </template>
 
 <script lang="ts">
-import {i18n} from "../../plugins/i18n";
+import {i18n} from "../plugins/i18n";
 import {format} from 'date-fns';
-import {useBookStore} from "../../stores";
-import {onMounted} from "vue";
+import {useBookStore} from "../stores";
+import { onMounted} from "vue";
 import {useRoute} from 'vue-router';
 import {mapState} from "pinia";
-import {useAppStore} from "../../stores";
+import {useAppStore} from "../stores";
+import {useReadingListStore} from "../stores/reading-list";
 
 export default {
   data() {
@@ -135,12 +137,23 @@ export default {
   setup() {
     const bookStore = useBookStore();
     const route = useRoute();
+    const readStore = useReadingListStore();
+
+    const getReadingList = async () => {
+      await readStore.index();
+    }
+
 
     const getBook = async () => {
       await bookStore.show(route.params.id);
     };
 
-    onMounted(getBook)
+    onMounted(async () => {
+      await Promise.all([
+        getBook(),
+        getReadingList(),
+      ]);
+    });
   },
   mounted() {
     this.headers[0].title = i18n.global.t('user');
@@ -149,8 +162,12 @@ export default {
   },
   computed: {
     ...mapState(useBookStore, ['book']),
+    ...mapState(useReadingListStore, ['readingList']),
     isMobile() {
       return this.$vuetify.display.mobile;
+    },
+    alreadyExistInReadingList() {
+      return this.readingList.some((item) => item.Book.id === this.book.id);
     },
     disableManagerBtn() {
       const appStore = useAppStore();
@@ -159,9 +176,14 @@ export default {
     disableNotLogged() {
       const appStore = useAppStore();
       return appStore.user.id === -1;
-    }
+    },
   },
   methods: {
+    async addBookToReadingList(book_id: number) {
+      const readStore = useReadingListStore();
+      await readStore.createOrDelete(book_id, 'create')
+        .then(async () => await readStore.index());
+    },
     handleSheet() {
       this.sheet = !this.sheet;
     },
