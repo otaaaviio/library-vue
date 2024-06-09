@@ -78,7 +78,7 @@
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center mt-10">
-      <v-card flat class="elevation-5 rounded-lg z-index-2">
+      <v-card flat class="elevation-5 rounded-lg z-index-2" width="1200">
         <v-card-title class="d-flex align-center pe-2">
           {{ $t('reviews') }}
           <v-spacer></v-spacer>
@@ -96,6 +96,7 @@
         </v-card-title>
         <v-data-table
           :mobile="isMobile"
+          :no-data-text="$t('no data')"
           :headers="headers"
           :items-per-page-text="$t('items per page')"
           :items="book.reviews"

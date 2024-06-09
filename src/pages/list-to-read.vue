@@ -30,6 +30,7 @@
       </v-card-title>
       <v-data-table
         :mobile="isMobile"
+        :no-data-text="$t('no data')"
         class="rounded-lg elevation-2"
         :headers="headers"
         :items="readingList"
