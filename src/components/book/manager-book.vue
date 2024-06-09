@@ -77,7 +77,7 @@
               v-model="book.publisher_id"
               :rules="[v => !!v || $t('publisher is required')]"
             />
-            <v-file-input :label="$t('file input')" variant="outlined" multiple v-model="book.images"/>
+            <v-file-input :label="$t('file input')" variant="outlined" multiple v-model="book.images" :hint="$t('hint book images')" persistent-hint/>
           </v-col>
         </v-row>
         <v-row class="d-flex justify-end align-baseline mb-7 mr-7">
@@ -233,7 +233,7 @@ export default {
             author_id: newVal.Author?.id,
             category_id: newVal.Category?.id,
             description: newVal.description,
-            published_at: null,
+            published_at: new Date(newVal.published_at),
             images: null,
           }
         }

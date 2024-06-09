@@ -1,4 +1,18 @@
 <template>
+  <v-dialog v-model="deleteDialogOpen" max-width="500">
+    <v-card :title="$t('logout')">
+      <v-card-text>
+        {{ $t('dialogConfirm') }}
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          :text="$t('confirm')"
+          @click="deleteBook"
+        ></v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
   <v-dialog v-model="dialogOpen" max-width="500">
     <form-review :handle-confirm="handleReview"/>
   </v-dialog>
@@ -25,7 +39,7 @@
           <h1>{{ book.title }}</h1>
           <div :hidden="disableManagerBtn">
             <v-btn @click="handleSheet">{{ $t('edit') }}</v-btn>
-            <v-btn class="ml-10" color="red">{{ $t('delete') }}</v-btn>
+            <v-btn class="ml-10" color="red" @click="handleDeleteDialog">{{ $t('delete') }}</v-btn>
           </div>
         </v-row>
         <v-row>
@@ -135,6 +149,7 @@ export default {
       sheet: false,
       search: '',
       dialogOpen: false,
+      deleteDialogOpen: false,
       headers: [
         {title: '', value: 'CreatedBy.name', key: 'CreatedBy.name'},
         {title: '', value: 'comment', key: 'comment'},
@@ -197,6 +212,14 @@ export default {
     },
   },
   methods: {
+    deleteBook() {
+      const bookStore = useBookStore();
+      bookStore.delete(this.book.id);
+      this.$router.push('/books');
+    },
+    handleDeleteDialog() {
+      this.deleteDialogOpen = !this.deleteDialogOpen;
+    },
     async addBookToReadingList(book_id: number) {
       const readStore = useReadingListStore();
       await readStore.createOrDelete(book_id, 'create')

@@ -73,13 +73,16 @@ export const useBookStore = defineStore({
             resolve(res);
           })
           .catch((err) => {
-            toast.error(i18n.global.t('error creating book'));
+            if (err.response?.data.message === 'Unique constraint failed on the fields: title')
+              toast.error(i18n.global.t('book title already exists'));
+            else
+              toast.error(i18n.global.t('error creating book'));
             reject(err);
           });
       });
     },
     async update(book: any, id: number) {
-      if(!!book.images)
+      if (!!book.images)
         book.images = await formatImages(book.images);
       const published_at_iso = book.published_at.toISOString();
 
@@ -91,10 +94,20 @@ export const useBookStore = defineStore({
             resolve(res);
           })
           .catch((err) => {
-            toast.error(i18n.global.t('error editing book'));
+            if (err.response?.data.message === 'Unique constraint failed on the fields: title')
+              toast.error(i18n.global.t('book title already exists'));
+            else
+              toast.error(i18n.global.t('error editing book'));
             reject(err);
           });
       });
+    },
+    delete(id: number) {
+      API.delete(`/books/${id}`).then(() => {
+        toast.success(i18n.global.t('delete success'));
+      }).catch(() => {
+        toast.error(i18n.global.t('error deleting book'));
+      })
     }
   },
 })
