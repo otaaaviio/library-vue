@@ -11,14 +11,9 @@ export const useReadingListStore = defineStore({
   }),
   actions: {
     index() {
-        API.get('userBooks', {
-          params: {
-            page: 1,
-            items_per_page: 150
-          }
-        })
+        API.get('userBooks')
           .then((res) => {
-            this.$state.readingList = res.data.data;
+            this.$state.readingList = res.data;
           })
           .catch(() => {
             toast.error(i18n.global.t('an error occurred'));
