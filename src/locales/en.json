@@ -136,7 +136,6 @@
   "category is required": "Category is required",
   "author is required": "Author is required",
   "publisher is required": "Publisher is required",
-  "file input is required": "Select book images",
   "loading": "Loading...",
   "error processing images": "Error processing images! Try again later.",
   "no data": "No data found",

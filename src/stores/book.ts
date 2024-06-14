@@ -56,9 +56,11 @@ export const useBookStore = defineStore({
         API.get(`/books/${id}`)
           .then((res) => {
             this.$state.book = res.data;
+            resolve(res);
           })
           .catch(() => {
             toast.error(i18n.global.t('error fetching book'));
+            reject();
           });
       })
     },
@@ -82,7 +84,7 @@ export const useBookStore = defineStore({
       });
     },
     async update(book: any, id: number) {
-      if (!!book.images)
+      if (book.images)
         book.images = await formatImages(book.images);
       const published_at_iso = book.published_at.toISOString();
 

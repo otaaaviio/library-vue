@@ -134,7 +134,6 @@
   "author is required": "Autor é obrigatório",
   "publisher is required": "Editora é obrigatória",
   "book title already exists": "Titulo do livro já existe!",
-  "file input is required": "Selecione imagens do livro",
   "delete success": "Deletado com sucesso!",
   "hint book images": "As imagens serão redefinidas conforme a seleção. Se nada for selecionado, as imagens não serão alteradas.",
   "loading": "Carregando...",

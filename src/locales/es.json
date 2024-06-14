@@ -136,7 +136,6 @@
   "category is required": "Categoría es obligatoria",
   "author is required": "Autor es obligatorio",
   "publisher is required": "Editorial es obligatoria",
-  "file input is required": "Selecciona imágenes del libro",
   "loading": "Cargando...",
   "error processing images": "¡Error al procesar las imágenes! Inténtalo de nuevo más tarde.",
   "no data": "No se encontraron datos",

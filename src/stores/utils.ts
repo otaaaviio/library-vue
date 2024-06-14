@@ -9,7 +9,7 @@ function fileToBase64(file: File) {
 
 export async function formatImages(images) {
   const base64Images = [];
-  for (let image of images) {
+  for (const image of images) {
     const base64Image = await fileToBase64(image);
     base64Images.push(base64Image);
   }

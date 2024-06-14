@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import {useReadingListStore} from "../stores/reading-list";
-import {onMounted, watch} from "vue";
+import {onMounted} from "vue";
 import {mapState} from "pinia";
 
 export default {

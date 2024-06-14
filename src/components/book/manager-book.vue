@@ -96,7 +96,7 @@
 <script lang="ts">
 import {CategoryEnumHelper} from "../../enums/category";
 import {usePublisherStore} from "../../stores/publisher";
-import {onMounted, watch} from "vue";
+import {onMounted} from "vue";
 import {mapState} from "pinia";
 import {useAuthorStore} from "../../stores/author";
 import {useBookStore} from "../../stores";
@@ -190,7 +190,7 @@ export default {
         toast.error(i18n.global.t('published at is required'));
         return
       } else if (!this.book.images?.length > 0 && !this.editing) {
-        toast.error(i18n.global.t('file input is required'));
+        toast.error(i18n.global.t('file input'));
         return
       }
 

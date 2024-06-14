@@ -24,6 +24,7 @@
     <v-pagination
       v-model="currentPage"
       :length="totalPages"
+      :total-visible="7"
       rounded
       class="pagination z-index-2"
     />
@@ -35,6 +36,7 @@ import {ref, onMounted, watch} from 'vue';
 import {useAppStore, useBookStore, usePaginationStore} from "../stores";
 import NewBook from "../components/book/manager-book.vue";
 import {mapState} from "pinia";
+import debounce from 'lodash/debounce';
 
 export default {
   components: {
@@ -52,9 +54,9 @@ export default {
     const currentPage = ref(pagStore.$state.currentPage);
     const totalPages = ref(pagStore.$state.totalPages);
 
-    const fetchBooks = async () => {
+    const fetchBooks = debounce(async () => {
       await bookStore.index(currentPage.value);
-    };
+    }, 300);
 
     const handleSheet = () => {
       sheet.value = !sheet.value;

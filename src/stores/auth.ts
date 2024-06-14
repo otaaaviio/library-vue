@@ -51,7 +51,7 @@ export const useAuthStore = defineStore({
         });
     },
     register(user: IRegister) {
-      return new Promise((resolve, _) => {
+      return new Promise((resolve, reject) => {
         API.post(`/users/register`, {
           name: user.name,
           email: user.email,
@@ -67,6 +67,7 @@ export const useAuthStore = defineStore({
             if (err.response?.data.message === "Unique constraint failed on the fields: email")
               toast.error(i18n.global.t('userAlreadyExists'))
             else toast.error(i18n.global.t('registerError'));
+            reject();
           });
       });
     },

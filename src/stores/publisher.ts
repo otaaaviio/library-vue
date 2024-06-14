@@ -9,11 +9,6 @@ export const usePublisherStore = defineStore({
   state: () => ({
     publishers: [] as IPublisher[],
   }),
-  getters: {
-    getPublishers() {
-      return this.publishers;
-    },
-  },
   actions: {
     index() {
       API.get(`/publishers`)

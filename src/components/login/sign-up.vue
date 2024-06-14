@@ -56,7 +56,6 @@
 import {toast} from "vue3-toastify";
 import {useAuthStore} from "../../stores";
 
-
 export default {
   data: () => ({
     user: {

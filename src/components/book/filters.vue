@@ -50,8 +50,8 @@ import {usePublisherStore} from "../../stores/publisher";
 import {useAuthorStore} from "../../stores/author";
 import {CategoryEnumHelper} from "../../enums/category";
 import {mapState} from "pinia";
-import {onMounted, watch} from "vue";
-import {useBookStore, usePaginationStore} from "../../stores";
+import {onMounted} from "vue";
+import {useBookStore} from "../../stores";
 import debounce from 'lodash/debounce';
 
 export default {
