@@ -10,25 +10,32 @@ This is a front-end project of a library that was developed with Vue.js. The pro
 
 Our system allows users to register and log in, ensuring that only authenticated users can perform certain operations within the site.
 
-![Login Home](url-da-imagem)
+![image](https://github.com/otaaaviio/library-vue/assets/129676776/09012c07-81fc-4d82-bc3d-b430e79d416f)
+
+
+![image](https://github.com/otaaaviio/library-vue/assets/129676776/89168a2f-bd85-4c77-80f0-3c99664590d9)
+
 
 ### Book Management
 
 The system allows users to view, add, edit, and delete books. Books can be searched by title, author, publisher, or category.
 
-![Book View](url-da-imagem)
+![image](https://github.com/otaaaviio/library-vue/assets/129676776/8ad5157e-fed0-4134-bea9-017b2a32aa81)
+
+![image](https://github.com/otaaaviio/library-vue/assets/129676776/e0277515-68c2-4049-9662-0f126c8d34b8)
 
 ### Reviews
 
 The system contains a review system that allows users to rate books and view their reviews made.
 
-![Reviews](url-da-imagem)
+![image](https://github.com/otaaaviio/library-vue/assets/129676776/27bd3d4f-de2c-43b4-984b-24e4c313cfb5)
 
 ### Reading Book List
 
 Users can add books to a reading list, allowing them to keep track of the books they want to read and mark which books they have read or not.
 
-![Reading List](url-da-imagem)
+![image](https://github.com/otaaaviio/library-vue/assets/129676776/be9a8142-cdae-4967-a486-3ae4cc916ab3)
+
 
 ### Multi-Language Support
 
@@ -44,6 +51,10 @@ The system allows users to choose between a light theme and a dark theme, allowi
 ### Docker
 
 The system is containerized using Docker, making it easy to deploy and scale.
+
+### Aditional information
+
+I attach some site pics for better visualization, but the site have more implementations, so fork the project and explore
 
 ## Getting Started
 
