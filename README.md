@@ -83,7 +83,10 @@ docker compose build --no-cache
 ```sh
 docker compose up -d
 ```
-Now you can access the [project](http://localhost:8080)
+Now you can access the project.
+Available on: <br>
+library-vue  |   http://127.0.0.1:8080 <br>
+library-vue  |   http://172.21.0.2:8080
 
 ## Development
 
