@@ -124,6 +124,7 @@
   "an error occurred": "¡Ocurrió un error!",
   "create new publisher": "Registrar nueva editorial",
   "create new author": "Registrar nuevo autor",
+  "email already exists": "¡El correo electrónico ya existe!",
   "title is required": "Título es obligatorio",
   "hint book images": "Las imágenes se restablecerán de acuerdo con la selección. Si no se selecciona nada, las imágenes no se cambiarán.",
   "delete success": "¡Eliminado con éxito!",

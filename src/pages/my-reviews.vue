@@ -154,7 +154,6 @@ export default {
   },
   methods: {
     openDialog(review, dialog) {
-      console.log(review)
       this.selectedReview = {...review};
       if (dialog === 'edit')
         this.openEditDialog = true;

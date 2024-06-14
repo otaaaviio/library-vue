@@ -29,8 +29,10 @@ export const useAppStore = defineStore('app', {
           toast.success(i18n.global.t('success editing user'));
         })
         .catch((err) => {
-          console.log(err)
-          toast.success(i18n.global.t('error editing user'));
+          if(err.response.data.message === 'Unique constraint failed on the fields: email')
+            toast.error(i18n.global.t(i18n.global.t('email already exists')));
+          else
+            toast.error(i18n.global.t('error editing user'));
         });
     }
   },

@@ -127,6 +127,7 @@
   "title is required": "Título é obrigatório",
   "filter": "Filtrar",
   "clean filters": "Limpar filtros",
+  "email already exists": "Email já existe!",
   "noBooks": "Nenhum livro encontrado",
   "published at is required": "Selecione uma data de publicação",
   "category is required": "Categoria é obrigatória",

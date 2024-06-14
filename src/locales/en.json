@@ -123,6 +123,7 @@
   "update success": "Successfully updated!",
   "an error occurred": "An error occurred!",
   "create new publisher": "Register new publisher",
+  "email already exists": "Email already exists",
   "create new author": "Register new author",
   "title is required": "Title is required",
   "filter": "Filter",
