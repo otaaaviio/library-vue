@@ -89,7 +89,6 @@ export const useBookStore = defineStore({
       return new Promise(async (resolve, reject) => {
         API.put(`/books/${id}`, {...book, published_at: published_at_iso})
           .then((res) => {
-            toast.success(i18n.global.t('update success'));
             this.$state.book = res.data.book;
             resolve(res);
           })

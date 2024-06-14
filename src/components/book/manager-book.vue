@@ -197,6 +197,9 @@ export default {
       if (this.editing)
         await bookStore.update(this.book, this.book_id).finally(() => {
           this.handleSheet();
+          this.$router.push('/books').then(() => {
+            toast.success(i18n.global.t('update success'));
+          })
         })
       else
         await bookStore.create(this.book).then(async () => {
@@ -213,7 +216,7 @@ export default {
         category_id: null,
         description: '',
         published_at: null,
-        images: [],
+        images: null,
       };
     },
   },

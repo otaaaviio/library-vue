@@ -163,8 +163,10 @@ export default {
     async updateReview(review: IReview) {
       this.openEditDialog = false;
       const reviewStore = useReviewStore();
-      await reviewStore.update(review);
-      await this.fetchReviews();
+      await reviewStore.update(review)
+        .then( async () => {
+          await this.fetchReviews();
+        })
       this.selectedReview = null;
     },
     async deleteReview(id: number) {

@@ -60,16 +60,20 @@ export const useReviewStore = defineStore({
         });
     },
     update(review: IReview) {
-      API.put(`/reviews/${review.id}`, {
-        rating: review.rating,
-        comment: review.comment,
-      })
-        .then(() => {
-          toast.success(i18n.global.t('review updated'));
+      return new Promise((resolve, reject) => {
+        API.put(`/reviews/${review.id}`, {
+          rating: review.rating,
+          comment: review.comment,
         })
-        .catch(() => {
-          toast.error(i18n.global.t('an error occurred'));
-        });
+          .then(() => {
+            toast.success(i18n.global.t('review updated'));
+            resolve();
+          })
+          .catch(() => {
+            toast.error(i18n.global.t('an error occurred'));
+            reject();
+          });
+      });
     },
     delete(id: number) {
       API.delete(`/reviews/${id}`)
